@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=long_job
-#SBATCH --time=06:00:00  # Set to 6 hours
+#SBATCH --time=00:10:00  
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:1
