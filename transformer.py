@@ -35,7 +35,7 @@ def enwik8(path=None, n_train=int(90e6), n_valid=int(5e6), n_test=int(5e6)):
     
 
     if path is None:
-        path = here('/home/ybe320/Thesis/bachelor-thesis/enwik8.gz')
+        path = here('/home/ybe320/Thesis/bachelor-thesis/data/enwik8.gz')
 
     with gzip.open(path) if path.endswith('.gz') else open(path) as file:
         X = np.fromstring(file.read(n_train + n_valid + n_test), dtype=np.uint8)
@@ -55,7 +55,7 @@ def enwik8_bytes(path=None, split=(90, 5, 5)):
 
 
     if path is None:
-        path = here('/home/ybe320/Thesis/bachelor-thesis/enwik8.gz')
+        path = here('/home/ybe320/Thesis/bachelor-thesis/data/enwik8.gz')
 
     with gzip.open(path, 'r') if path.endswith('.gz') else open(path, 'rb') as file:
         all = file.read()
@@ -83,7 +83,7 @@ def enwik8_string(path=None, split=(90, 5, 5)):
 
 
     if path is None:
-        path = here('/home/ybe320/Thesis/bachelor-thesis/enwik8.gz')
+        path = here('/home/ybe320/Thesis/bachelor-thesis/data/enwik8.gz')
 
     with gzip.open(path, 'rt') if path.endswith('.gz') else open(path, 'r') as file:
         all = file.read()
