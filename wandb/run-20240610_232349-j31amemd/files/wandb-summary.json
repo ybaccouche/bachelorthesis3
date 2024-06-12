@@ -1,0 +1,1 @@
+{"training_loss": "None.Tensor.item", "_timestamp": 1718054762.816438, "_runtime": 133.31049799919128, "_step": 109, "validation_loss": 4.948495674133301, "_wandb": {"runtime": 132}}

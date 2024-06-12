@@ -1,0 +1,958 @@
+2024-06-10 23:31:27,481 INFO    StreamThr :9884 [internal.py:wandb_internal():85] W&B internal server running at pid: 9884, started at: 2024-06-10 23:31:27.480077
+2024-06-10 23:31:27,483 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status
+2024-06-10 23:31:27,487 INFO    WriterThread:9884 [datastore.py:open_for_write():87] open: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/run-2gbksk2m.wandb
+2024-06-10 23:31:27,487 DEBUG   SenderThread:9884 [sender.py:send():379] send: header
+2024-06-10 23:31:27,516 DEBUG   SenderThread:9884 [sender.py:send():379] send: run
+2024-06-10 23:31:27,892 INFO    SenderThread:9884 [dir_watcher.py:__init__():211] watching files in: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files
+2024-06-10 23:31:27,892 INFO    SenderThread:9884 [sender.py:_start_run_threads():1188] run started: 2gbksk2m with start time 1718055087.481067
+2024-06-10 23:31:27,903 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: check_version
+2024-06-10 23:31:27,903 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: check_version
+2024-06-10 23:31:27,967 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: run_start
+2024-06-10 23:31:27,984 DEBUG   HandlerThread:9884 [system_info.py:__init__():26] System info init
+2024-06-10 23:31:27,984 DEBUG   HandlerThread:9884 [system_info.py:__init__():41] System info init done
+2024-06-10 23:31:27,984 INFO    HandlerThread:9884 [system_monitor.py:start():194] Starting system monitor
+2024-06-10 23:31:27,984 INFO    SystemMonitor:9884 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-06-10 23:31:27,985 INFO    HandlerThread:9884 [system_monitor.py:probe():214] Collecting system info
+2024-06-10 23:31:27,985 DEBUG   HandlerThread:9884 [system_info.py:probe():152] Probing system
+2024-06-10 23:31:27,985 INFO    SystemMonitor:9884 [interfaces.py:start():188] Started cpu monitoring
+2024-06-10 23:31:27,986 INFO    SystemMonitor:9884 [interfaces.py:start():188] Started disk monitoring
+2024-06-10 23:31:27,987 INFO    SystemMonitor:9884 [interfaces.py:start():188] Started memory monitoring
+2024-06-10 23:31:27,988 INFO    SystemMonitor:9884 [interfaces.py:start():188] Started network monitoring
+2024-06-10 23:31:27,996 DEBUG   HandlerThread:9884 [system_info.py:_probe_git():137] Probing git
+2024-06-10 23:31:28,018 DEBUG   HandlerThread:9884 [system_info.py:_probe_git():145] Probing git done
+2024-06-10 23:31:28,018 DEBUG   HandlerThread:9884 [system_info.py:probe():200] Probing system done
+2024-06-10 23:31:28,018 DEBUG   HandlerThread:9884 [system_monitor.py:probe():223] {'os': 'macOS-10.16-x86_64-i386-64bit', 'python': '3.9.13', 'heartbeatAt': '2024-06-10T21:31:27.985544', 'startedAt': '2024-06-10T21:31:27.467974', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/Users/youssefbaccouche/Developer/bachelor-thesis/tranny.py', 'codePathLocal': 'tranny.py', 'codePath': 'tranny.py', 'git': {'remote': 'https://github.com/ybaccouche/bachelor-thesis.git', 'commit': '39c9fb46057f88a988c4ecc51cbbe8f7e2483649'}, 'email': 'youssefbaccou@gmail.com', 'root': '/Users/youssefbaccouche/Developer/bachelor-thesis', 'host': 'Youssefs-MacBook-Pro.local', 'username': 'youssefbaccouche', 'executable': '/opt/anaconda3/bin/python', 'cpu_count': 10, 'cpu_count_logical': 10, 'cpu_freq': {'current': 2400, 'min': 2400, 'max': 2400}, 'cpu_freq_per_core': [{'current': 2400, 'min': 2400, 'max': 2400}], 'disk': {'/': {'total': 1858.1917190551758, 'used': 191.16901779174805}}, 'memory': {'total': 16.0}}
+2024-06-10 23:31:28,018 INFO    HandlerThread:9884 [system_monitor.py:probe():224] Finished collecting system info
+2024-06-10 23:31:28,018 INFO    HandlerThread:9884 [system_monitor.py:probe():227] Publishing system info
+2024-06-10 23:31:28,018 DEBUG   HandlerThread:9884 [system_info.py:_save_conda():209] Saving list of conda packages installed into the current environment
+2024-06-10 23:31:28,899 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/conda-environment.yaml
+2024-06-10 23:31:33,641 DEBUG   HandlerThread:9884 [system_info.py:_save_conda():224] Saving conda packages done
+2024-06-10 23:31:33,642 INFO    HandlerThread:9884 [system_monitor.py:probe():229] Finished publishing system info
+2024-06-10 23:31:33,647 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:31:33,647 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: keepalive
+2024-06-10 23:31:33,648 DEBUG   SenderThread:9884 [sender.py:send():379] send: files
+2024-06-10 23:31:33,648 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-metadata.json with policy now
+2024-06-10 23:31:33,885 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: python_packages
+2024-06-10 23:31:33,886 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: python_packages
+2024-06-10 23:31:33,887 DEBUG   SenderThread:9884 [sender.py:send():379] send: telemetry
+2024-06-10 23:31:33,887 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-10 23:31:33,887 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: stop_status
+2024-06-10 23:31:33,888 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:33,923 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/conda-environment.yaml
+2024-06-10 23:31:33,923 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/requirements.txt
+2024-06-10 23:31:33,924 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-metadata.json
+2024-06-10 23:31:34,152 INFO    wandb-upload_0:9884 [upload_job.py:push():130] Uploaded file /var/folders/yc/d0b45_gs319592768hmxskbm0000gn/T/tmpz__3jut7wandb/1xyw5ahl-wandb-metadata.json
+2024-06-10 23:31:34,908 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:34,934 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:31:35,561 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:35,562 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:35,562 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:35,563 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:35,896 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:35,934 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:36,428 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:36,429 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:36,429 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:36,431 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:36,903 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:36,945 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:31:36,946 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:37,278 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:37,278 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:37,279 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:37,279 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:37,907 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:37,947 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:38,136 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:38,138 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:38,139 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:38,139 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:31:38,140 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:38,913 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:38,941 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:38,942 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:38,942 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:38,943 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:38,950 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:31:38,950 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:39,743 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:39,744 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:39,744 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:39,745 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:39,914 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:39,953 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:40,558 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:40,559 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:40,559 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:40,559 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:40,924 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:40,956 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:31:40,956 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:41,367 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:41,368 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:41,368 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:41,368 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:41,929 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:41,960 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:42,169 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:42,170 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:42,170 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:42,171 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:42,934 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:42,966 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:31:42,966 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:42,997 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:42,998 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:42,998 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:42,998 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:43,250 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:31:43,937 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:43,969 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:44,943 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:44,974 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:31:45,570 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:45,571 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:45,571 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:45,572 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:45,946 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:45,979 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:46,454 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:46,455 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:46,455 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:46,456 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:46,947 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:46,980 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:31:46,980 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:47,316 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:47,316 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:47,317 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:47,318 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:47,947 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:47,985 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:48,181 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:48,182 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:48,182 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:48,184 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:48,891 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-10 23:31:48,892 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: stop_status
+2024-06-10 23:31:48,954 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:48,988 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:31:48,988 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:49,133 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:49,135 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:49,135 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:31:49,135 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:49,136 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:49,953 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:49,993 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:50,050 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:50,051 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:50,051 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:50,053 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:50,926 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:50,927 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:50,927 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:50,927 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:50,958 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:50,995 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:31:50,995 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:51,787 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:51,787 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:51,788 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:51,789 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:51,965 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:52,000 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:52,655 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:52,657 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:52,657 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:52,657 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:52,966 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:53,007 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:31:53,008 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:53,498 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:53,499 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:53,499 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:53,500 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:53,971 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:54,012 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:54,387 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:54,387 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:31:54,387 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:54,388 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:54,388 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:54,973 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:55,018 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:31:55,018 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:55,978 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:56,983 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:57,028 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:31:57,119 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:57,120 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:57,120 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:57,120 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:57,985 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:57,991 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:57,991 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:57,991 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:57,992 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:58,029 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:58,869 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:58,870 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:58,870 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:58,870 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:31:58,990 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:59,038 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:31:59,038 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:31:59,826 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:31:59,827 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:31:59,832 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:31:59,995 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:31:59,999 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:31:59,999 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:00,038 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/config.yaml
+2024-06-10 23:32:00,038 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:00,876 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:00,877 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:00,877 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:00,877 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:00,998 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:01,048 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:01,048 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:01,741 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:01,742 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:01,743 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:01,743 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:02,002 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:02,051 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:02,592 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:02,593 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:02,593 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:02,593 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:03,004 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:03,056 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:03,056 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:03,444 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:03,445 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:03,445 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:03,446 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:03,896 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-10 23:32:03,896 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: stop_status
+2024-06-10 23:32:04,009 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:04,061 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:04,283 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:04,283 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:04,283 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:04,284 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:05,013 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:05,064 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:05,065 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:05,131 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:05,132 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:05,132 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:05,132 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:32:05,133 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:05,981 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:05,982 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:05,982 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:05,982 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:06,019 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:06,068 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:07,025 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:07,073 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:08,029 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:08,752 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:08,753 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:08,753 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:08,753 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:09,034 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:09,089 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:09,089 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:09,685 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:09,686 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:09,686 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:09,686 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:10,039 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:10,090 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:10,587 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:10,588 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:10,588 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:10,588 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:32:10,589 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:11,044 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:11,093 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:11,094 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:11,448 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:11,449 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:11,449 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:11,449 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:12,047 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:12,099 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:12,331 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:12,332 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:12,332 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:12,333 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:13,050 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:13,104 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:13,105 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:13,211 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:13,212 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:13,212 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:13,212 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:14,055 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:14,108 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:14,184 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:14,185 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:14,185 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:14,185 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:15,062 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:15,112 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:15,113 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:15,141 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:15,142 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:15,142 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:15,143 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:16,066 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:16,115 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:16,146 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:32:16,157 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:16,158 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:16,158 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:16,159 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:17,069 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:17,090 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:17,091 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:17,092 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:17,092 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:17,118 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:17,119 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:18,017 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:18,018 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:18,018 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:18,018 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:18,073 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:18,124 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:18,899 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-10 23:32:18,900 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: stop_status
+2024-06-10 23:32:19,079 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:19,129 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:20,083 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:21,026 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:21,026 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:21,027 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:21,027 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:21,083 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:21,137 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:21,137 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:21,990 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:21,991 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:21,991 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:21,991 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:32:21,992 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:22,091 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:22,143 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:23,040 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:23,041 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:23,041 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:23,042 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:23,094 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:23,148 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:23,149 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:23,993 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:23,994 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:23,994 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:23,994 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:24,099 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:24,153 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:24,937 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:24,938 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:24,938 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:24,938 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:25,105 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:25,158 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:25,158 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:25,899 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:25,900 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:25,900 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:25,900 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:26,108 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:26,163 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:26,839 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:26,839 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:26,840 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:26,840 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:27,113 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:27,169 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:27,169 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:27,790 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:27,790 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:27,791 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:27,791 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:32:27,791 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:27,993 DEBUG   SystemMonitor:9884 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-06-10 23:32:27,995 DEBUG   SenderThread:9884 [sender.py:send():379] send: stats
+2024-06-10 23:32:28,118 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:28,174 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:28,792 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:28,793 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:28,793 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:28,794 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:29,123 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:29,179 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:29,179 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:29,851 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:29,852 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:29,852 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:29,852 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:30,128 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:30,184 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:30,843 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:30,843 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:30,844 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:30,844 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:31,133 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:31,189 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:31,190 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:32,137 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:32,825 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:32:33,139 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:33,199 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:33,904 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-10 23:32:33,904 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: stop_status
+2024-06-10 23:32:34,063 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:34,067 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:34,067 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:34,067 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:34,142 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:34,216 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:35,147 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:35,156 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:35,156 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:35,156 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:35,157 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:35,222 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:35,222 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:36,151 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:36,265 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:36,266 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:36,266 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:36,266 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:37,164 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:37,233 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:37,233 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:37,538 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:37,538 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:37,538 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:37,540 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:38,179 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:38,238 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:38,545 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:32:38,728 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:38,728 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:38,729 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:38,729 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:39,177 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:39,243 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:39,244 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:39,841 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:39,841 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:39,842 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:39,842 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:40,182 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:40,249 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:40,905 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:40,905 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:40,906 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:40,906 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:41,185 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:41,255 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:41,255 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:41,872 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:41,873 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:41,873 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:41,873 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:42,191 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:42,260 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:42,849 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:42,850 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:42,850 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:42,851 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:43,191 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:43,265 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:43,265 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:43,855 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:32:43,879 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:43,879 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:43,880 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:43,880 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:44,196 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:44,269 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:44,850 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:44,851 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:44,851 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:44,851 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:45,200 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:45,275 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:45,275 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:46,205 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:47,208 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:47,285 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:47,990 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:47,990 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:47,990 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:47,991 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:48,213 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:48,289 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:48,909 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-10 23:32:48,909 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: stop_status
+2024-06-10 23:32:48,961 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:49,059 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:49,059 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:32:49,059 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:49,060 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:49,217 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:49,290 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:49,290 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:49,928 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:49,929 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:49,929 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:49,929 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:50,222 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:50,292 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:50,880 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:50,880 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:50,881 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:50,881 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:51,226 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:51,295 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:51,295 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:51,863 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:51,863 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:51,864 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:51,865 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:52,228 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:52,296 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:52,848 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:52,849 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:52,849 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:52,850 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:53,232 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:53,302 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:53,302 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:53,810 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:53,811 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:53,811 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:53,812 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:54,237 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:54,307 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:54,799 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:54,801 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:54,802 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:54,802 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:32:54,802 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:55,242 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:55,313 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:55,314 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:55,774 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:55,775 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:55,775 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:55,775 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:56,246 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:56,318 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:56,750 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:56,750 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:56,751 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:56,751 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:57,252 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:57,323 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:57,324 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:57,735 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:32:57,736 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:32:57,736 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:32:57,736 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:32:58,001 DEBUG   SenderThread:9884 [sender.py:send():379] send: stats
+2024-06-10 23:32:58,256 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:58,329 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:32:59,262 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:32:59,335 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:32:59,907 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:33:00,266 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:00,847 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:00,848 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:00,848 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:00,848 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:01,271 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:01,342 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:01,342 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:01,858 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:01,858 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:01,859 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:01,859 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:02,277 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:02,343 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:02,819 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:02,820 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:02,820 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:02,820 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:03,282 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:03,345 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:03,346 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:03,825 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:03,826 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:03,826 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:03,826 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:03,914 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-10 23:33:03,914 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: stop_status
+2024-06-10 23:33:04,285 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:04,349 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:04,805 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:04,806 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:04,806 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:04,807 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:05,287 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:05,354 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:05,354 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:05,767 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:05,768 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:05,769 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:05,769 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:33:05,769 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:06,293 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:06,360 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:06,721 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:06,722 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:06,722 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:06,722 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:07,296 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:07,367 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:07,368 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:07,678 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:07,679 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:07,679 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:07,679 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:08,298 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:08,373 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:08,656 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:08,657 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:08,657 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:08,658 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:09,303 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:09,378 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:09,378 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:09,653 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:09,653 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:09,654 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:09,654 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:10,305 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:10,385 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:10,618 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:10,618 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:10,618 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:10,619 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:10,951 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:33:11,310 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:11,386 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:11,387 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:12,315 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:13,325 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:13,397 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:13,782 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:13,782 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:13,782 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:13,783 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:14,325 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:14,402 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:14,742 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:14,742 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:14,743 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:14,743 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:15,331 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:15,408 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:15,408 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:15,684 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:15,685 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:15,685 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:15,685 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:16,333 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:16,413 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:16,654 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:16,655 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:16,655 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:16,655 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:33:16,655 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:17,338 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:17,419 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:17,419 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:17,621 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:17,621 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:17,622 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:17,622 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:18,341 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:18,424 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:18,598 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:18,599 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:18,599 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:18,599 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:18,919 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-10 23:33:18,920 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: stop_status
+2024-06-10 23:33:19,345 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:19,430 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:19,430 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:19,571 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:19,572 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:19,572 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:19,573 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:20,350 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:20,431 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:20,612 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:20,612 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:20,613 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:20,613 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:21,356 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:21,437 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:21,438 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:21,657 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:21,658 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:21,658 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:21,659 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:33:21,659 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:22,361 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:22,440 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:22,714 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:22,715 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:22,715 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:22,716 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:23,365 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:23,447 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:23,447 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:23,743 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:23,744 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:23,744 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:23,744 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:24,376 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:24,450 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:25,379 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:25,456 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:26,384 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:26,889 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:33:26,890 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:26,890 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:26,890 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:26,890 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:27,388 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:27,460 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:27,461 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:27,867 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:27,867 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:27,867 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:27,868 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:28,004 DEBUG   SenderThread:9884 [sender.py:send():379] send: stats
+2024-06-10 23:33:28,390 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:28,464 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:28,954 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:28,955 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:28,955 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:28,955 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:29,395 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:29,470 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:29,471 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:30,098 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:30,099 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:30,099 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:30,099 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:30,400 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:30,475 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:31,087 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:31,088 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:31,088 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:31,090 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:31,403 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:31,480 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:31,481 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:32,095 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:33:32,158 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:32,159 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:32,160 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:32,160 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:32,408 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:32,487 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:33,104 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:33,104 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:33,105 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:33,105 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:33,410 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:33,490 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:33,490 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:33,923 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-10 23:33:33,924 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: stop_status
+2024-06-10 23:33:34,137 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:34,138 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:34,138 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:34,139 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:34,412 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:34,495 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:35,162 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:35,163 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:35,163 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:35,163 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:35,417 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:35,498 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:35,498 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:36,199 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:36,200 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:36,200 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:36,201 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:36,422 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:36,503 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:37,154 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:37,154 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:33:37,154 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:37,155 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:37,155 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:37,427 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:37,509 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:37,509 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:38,428 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:39,430 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:39,518 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:40,226 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-10 23:33:40,226 DEBUG   SenderThread:9884 [sender.py:send():379] send: history
+2024-06-10 23:33:40,227 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: summary_record
+2024-06-10 23:33:40,227 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:40,243 DEBUG   SenderThread:9884 [sender.py:send():379] send: exit
+2024-06-10 23:33:40,243 INFO    SenderThread:9884 [sender.py:send_exit():586] handling exit code: 0
+2024-06-10 23:33:40,243 INFO    SenderThread:9884 [sender.py:send_exit():588] handling runtime: 132
+2024-06-10 23:33:40,244 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:40,244 INFO    SenderThread:9884 [sender.py:send_exit():594] send defer
+2024-06-10 23:33:40,244 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:40,244 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 0
+2024-06-10 23:33:40,244 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:40,244 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-06-10 23:33:40,244 INFO    SenderThread:9884 [sender.py:transition_state():614] send defer: 1
+2024-06-10 23:33:40,244 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:40,244 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 1
+2024-06-10 23:33:40,244 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:40,244 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-06-10 23:33:40,244 INFO    SenderThread:9884 [sender.py:transition_state():614] send defer: 2
+2024-06-10 23:33:40,245 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:40,245 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 2
+2024-06-10 23:33:40,245 INFO    HandlerThread:9884 [system_monitor.py:finish():203] Stopping system monitor
+2024-06-10 23:33:40,245 DEBUG   SystemMonitor:9884 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-06-10 23:33:40,245 INFO    HandlerThread:9884 [interfaces.py:finish():200] Joined cpu monitor
+2024-06-10 23:33:40,245 DEBUG   SystemMonitor:9884 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-06-10 23:33:40,245 INFO    HandlerThread:9884 [interfaces.py:finish():200] Joined disk monitor
+2024-06-10 23:33:40,245 INFO    HandlerThread:9884 [interfaces.py:finish():200] Joined memory monitor
+2024-06-10 23:33:40,245 INFO    HandlerThread:9884 [interfaces.py:finish():200] Joined network monitor
+2024-06-10 23:33:40,246 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:40,246 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-06-10 23:33:40,246 INFO    SenderThread:9884 [sender.py:transition_state():614] send defer: 3
+2024-06-10 23:33:40,246 DEBUG   SenderThread:9884 [sender.py:send():379] send: stats
+2024-06-10 23:33:40,246 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:40,246 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 3
+2024-06-10 23:33:40,246 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:40,246 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-06-10 23:33:40,246 INFO    SenderThread:9884 [sender.py:transition_state():614] send defer: 4
+2024-06-10 23:33:40,246 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:40,246 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 4
+2024-06-10 23:33:40,247 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:40,247 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-06-10 23:33:40,247 INFO    SenderThread:9884 [sender.py:transition_state():614] send defer: 5
+2024-06-10 23:33:40,247 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:40,247 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 5
+2024-06-10 23:33:40,247 DEBUG   SenderThread:9884 [sender.py:send():379] send: summary
+2024-06-10 23:33:40,247 INFO    SenderThread:9884 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-06-10 23:33:40,247 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:40,247 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-06-10 23:33:40,247 INFO    SenderThread:9884 [sender.py:transition_state():614] send defer: 6
+2024-06-10 23:33:40,247 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:40,247 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 6
+2024-06-10 23:33:40,247 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:40,248 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-06-10 23:33:40,248 INFO    SenderThread:9884 [sender.py:transition_state():614] send defer: 7
+2024-06-10 23:33:40,248 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: status_report
+2024-06-10 23:33:40,248 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:40,248 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 7
+2024-06-10 23:33:40,248 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:40,248 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-06-10 23:33:40,524 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:41,061 INFO    SenderThread:9884 [sender.py:transition_state():614] send defer: 8
+2024-06-10 23:33:41,062 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:41,062 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 8
+2024-06-10 23:33:41,062 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:41,062 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-06-10 23:33:41,063 INFO    SenderThread:9884 [job_builder.py:build():440] Attempting to build job artifact
+2024-06-10 23:33:41,064 INFO    SenderThread:9884 [job_builder.py:_get_source_type():569] is repo sourced job
+2024-06-10 23:33:41,163 INFO    SenderThread:9884 [job_builder.py:build():545] adding wandb-job metadata file
+2024-06-10 23:33:41,165 INFO    SenderThread:9884 [sender.py:transition_state():614] send defer: 9
+2024-06-10 23:33:41,166 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:41,166 DEBUG   SenderThread:9884 [sender.py:send():379] send: artifact
+2024-06-10 23:33:41,166 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 9
+2024-06-10 23:33:41,248 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: poll_exit
+2024-06-10 23:33:41,531 INFO    Thread-12 :9884 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:41,877 INFO    SenderThread:9884 [sender.py:send_artifact():1530] sent artifact job-https___github.com_ybaccouche_bachelor-thesis.git_tranny.py - {'id': 'QXJ0aWZhY3Q6ODY2ODkxMTEx', 'state': 'COMMITTED', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjE4NDQ2NDQ5NA==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6ODY2ODkxMTEx', 'versionIndex': 1}}}
+2024-06-10 23:33:41,878 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:41,878 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 9
+2024-06-10 23:33:41,878 INFO    SenderThread:9884 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-06-10 23:33:42,538 INFO    SenderThread:9884 [dir_watcher.py:finish():388] scan: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files
+2024-06-10 23:33:42,539 INFO    SenderThread:9884 [dir_watcher.py:finish():402] scan save: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/requirements.txt requirements.txt
+2024-06-10 23:33:42,540 INFO    SenderThread:9884 [dir_watcher.py:finish():402] scan save: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log output.log
+2024-06-10 23:33:42,540 INFO    SenderThread:9884 [dir_watcher.py:finish():402] scan save: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/config.yaml config.yaml
+2024-06-10 23:33:42,540 INFO    SenderThread:9884 [dir_watcher.py:finish():402] scan save: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json wandb-summary.json
+2024-06-10 23:33:42,541 INFO    SenderThread:9884 [dir_watcher.py:finish():402] scan save: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/conda-environment.yaml conda-environment.yaml
+2024-06-10 23:33:42,548 INFO    SenderThread:9884 [dir_watcher.py:finish():402] scan save: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-metadata.json wandb-metadata.json
+2024-06-10 23:33:42,551 INFO    SenderThread:9884 [sender.py:transition_state():614] send defer: 10
+2024-06-10 23:33:42,551 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: poll_exit
+2024-06-10 23:33:42,554 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:42,555 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 10
+2024-06-10 23:33:42,558 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:42,559 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 10
+2024-06-10 23:33:42,559 INFO    SenderThread:9884 [file_pusher.py:finish():169] shutting down file pusher
+2024-06-10 23:33:43,023 INFO    wandb-upload_2:9884 [upload_job.py:push():130] Uploaded file /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/config.yaml
+2024-06-10 23:33:43,024 INFO    wandb-upload_3:9884 [upload_job.py:push():130] Uploaded file /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/wandb-summary.json
+2024-06-10 23:33:43,024 INFO    wandb-upload_1:9884 [upload_job.py:push():130] Uploaded file /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/output.log
+2024-06-10 23:33:43,034 INFO    wandb-upload_4:9884 [upload_job.py:push():130] Uploaded file /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/conda-environment.yaml
+2024-06-10 23:33:43,053 INFO    wandb-upload_0:9884 [upload_job.py:push():130] Uploaded file /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/files/requirements.txt
+2024-06-10 23:33:43,259 INFO    Thread-11 :9884 [sender.py:transition_state():614] send defer: 11
+2024-06-10 23:33:43,264 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: poll_exit
+2024-06-10 23:33:43,264 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:43,265 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 11
+2024-06-10 23:33:43,265 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: poll_exit
+2024-06-10 23:33:43,266 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:43,266 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 11
+2024-06-10 23:33:43,266 INFO    SenderThread:9884 [file_pusher.py:join():175] waiting for file pusher
+2024-06-10 23:33:43,267 INFO    SenderThread:9884 [sender.py:transition_state():614] send defer: 12
+2024-06-10 23:33:43,267 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:43,267 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 12
+2024-06-10 23:33:43,267 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:43,268 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 12
+2024-06-10 23:33:43,268 INFO    SenderThread:9884 [file_stream.py:finish():601] file stream finish called
+2024-06-10 23:33:43,913 INFO    SenderThread:9884 [file_stream.py:finish():605] file stream finish is done
+2024-06-10 23:33:43,914 INFO    SenderThread:9884 [sender.py:transition_state():614] send defer: 13
+2024-06-10 23:33:43,914 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:43,914 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 13
+2024-06-10 23:33:43,915 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:43,915 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 13
+2024-06-10 23:33:43,915 INFO    SenderThread:9884 [sender.py:transition_state():614] send defer: 14
+2024-06-10 23:33:43,915 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: defer
+2024-06-10 23:33:43,915 INFO    HandlerThread:9884 [handler.py:handle_request_defer():184] handle defer: 14
+2024-06-10 23:33:43,916 DEBUG   SenderThread:9884 [sender.py:send():379] send: final
+2024-06-10 23:33:43,916 DEBUG   SenderThread:9884 [sender.py:send():379] send: footer
+2024-06-10 23:33:43,916 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: defer
+2024-06-10 23:33:43,916 INFO    SenderThread:9884 [sender.py:send_request_defer():610] handle sender defer: 14
+2024-06-10 23:33:43,917 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: poll_exit
+2024-06-10 23:33:43,918 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: poll_exit
+2024-06-10 23:33:43,918 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: server_info
+2024-06-10 23:33:43,919 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: server_info
+2024-06-10 23:33:43,921 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: poll_exit
+2024-06-10 23:33:43,922 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: get_summary
+2024-06-10 23:33:43,923 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: sampled_history
+2024-06-10 23:33:43,925 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-10 23:33:44,053 DEBUG   SenderThread:9884 [sender.py:send_request():406] send_request: poll_exit
+2024-06-10 23:33:44,054 INFO    MainThread:9884 [wandb_run.py:_footer_history_summary_info():4008] rendering history
+2024-06-10 23:33:44,054 INFO    MainThread:9884 [wandb_run.py:_footer_history_summary_info():4040] rendering summary
+2024-06-10 23:33:44,055 INFO    MainThread:9884 [wandb_run.py:_footer_sync_info():3967] logging synced files
+2024-06-10 23:33:44,056 DEBUG   HandlerThread:9884 [handler.py:handle_request():158] handle_request: shutdown
+2024-06-10 23:33:44,056 INFO    HandlerThread:9884 [handler.py:finish():882] shutting down handler
+2024-06-10 23:33:44,927 INFO    WriterThread:9884 [datastore.py:close():296] close: /Users/youssefbaccouche/Developer/bachelor-thesis/wandb/run-20240610_233127-2gbksk2m/run-2gbksk2m.wandb
+2024-06-10 23:33:45,059 INFO    SenderThread:9884 [sender.py:finish():1608] shutting down sender
+2024-06-10 23:33:45,059 INFO    SenderThread:9884 [file_pusher.py:finish():169] shutting down file pusher
+2024-06-10 23:33:45,060 INFO    SenderThread:9884 [file_pusher.py:join():175] waiting for file pusher
