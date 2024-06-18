@@ -21,4 +21,4 @@ BASE_DIR=$HOME/Thesis/bachelor-thesis
 cd $BASE_DIR
 
 # Run the Python script
-python /home/ybe320/Thesis/bachelor-thesis/transformer.py --batch_size 32 --epochs 1000 --lr 0.001
+python /home/ybe320/Thesis/bachelor-thesis3/transformer.py --batch_size 32 --epochs 1000 --lr 0.001

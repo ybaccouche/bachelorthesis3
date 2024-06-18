@@ -22,5 +22,5 @@ echo $$
 mkdir o`echo $$`
 cd o`echo $$`
 
-python /home/ybe320/Thesis/bachelor-thesis/transformer.py 
+python /home/ybe320/Thesis/bachelor-thesis3/transformer.py 
 
