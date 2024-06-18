@@ -12,6 +12,7 @@ import torch, os, time, math, gzip
 from tqdm import tqdm
 import torch.distributions as dist
 import argparse
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -686,7 +687,7 @@ def main(args):
     model.to(d())
     criterion = nn.NLLLoss()
     optimizer = optim.Adam(model.parameters(), lr=config["learning_rate"]) #lr=args.lr
-
+    scheduler = ReduceLROnPlateau(optimizer, 'min', factor=0.1, patience=100)
     # Early stopping and checkpointing setup
     patience = 20  # How many intervals to wait before stopping
     best_val_loss = float('inf')
@@ -706,6 +707,7 @@ def main(args):
         loss = criterion(output, targets)
         loss.backward()
         optimizer.step()
+        scheduler.step(val_loss)
 
         if (epoch + 1) % config["print_interval"] == 0:
             print(f'Epoch {epoch + 1}: Training Loss = {loss.item()}')
