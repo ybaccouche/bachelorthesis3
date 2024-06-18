@@ -17,7 +17,7 @@ from torch.utils.tensorboard import SummaryWriter
 
 import numpy as np
 
-### DATA PREPROCESSING ###
+### DATA PREPROCESSING ##
 
 wandb.login(key='694fb34144778f8ff751adfb317024489e1a077e')
 def enwik8(path=None, n_train=int(90e6), n_valid=int(5e6), n_test=int(5e6)):
