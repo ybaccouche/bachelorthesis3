@@ -1,118 +1,24 @@
 #!/bin/bash
-#SBATCH --job-name=long_job
-#SBATCH --time=00:10:00  
-#SBATCH -N 1
-#SBATCH --ntasks-per-node=1
-#SBATCH --gres=gpu:1
-#SBATCH --output=/home/ybe320/Thesis/bachelor-thesis/jobs/outputs/long_job_%j.out
-#SBATCH --error=/home/ybe320/Thesis/bachelor-thesis/jobs/outputs/long_job_%j.err
+#SBATCH --job-name=work_pls                      # Job name
+#SBATCH --time=00:14:00                      # Time limit hrs:min:sec
+#SBATCH -N 1                                 # Number of nodes
+#SBATCH --ntasks-per-node=1                  # Number of tasks per node
+#SBATCH --partition=defq   # Partition name
+#SBATCH --gres=gpu:1                         # Number of GPUs per node
+#SBATCH --output=/home/ybe320/Thesis/bachelor-thesis/jobs/outputs/job_%j.out  # Output file
+#SBATCH --error=/home/ybe320/Thesis/bachelor-thesis/jobs/outputs/job_%j.err   # Error file
 
-echo "Starting job script"
-date
+# Uncomment and set the correct CUDA module if required by your cluster setup
+module load cuda12.1/toolkit
+module load cuDNN/cuda12.1
 
-# Move to the correct directory
-cd /home/ybe320/Thesis/bachelor-thesis/
-if [ $? -ne 0 ]; then
-  echo "Failed to change directory to /home/ybe320/Thesis/bachelor-thesis/"
-  exit 1
-fi
-
-echo "SLURM job ID: $SLURM_JOB_ID"
-echo "Running on host: $(hostname)"
-echo "Current directory: $(pwd)"
-date
-
-# Load GPU drivers
-module load cuda12.3/toolkit
-if [ $? -ne 0 ]; then
-  echo "Failed to load CUDA toolkit"
-  exit 1
-fi
-
-# Source bashrc and activate conda environment
+# Activate Anaconda environment
 source $HOME/.bashrc
-if [ $? -ne 0 ]; then
-  echo "Failed to source .bashrc"
-  exit 1
-fi
-
 conda activate
-if [ $? -ne 0 ]; then
-  echo "Failed to activate conda environment"
-  exit 1
-fi
 
-# Install required packages from requirements.txt
-pip install -r requirements.txt
-if [ $? -ne 0 ]; then
-  echo "Failed to install required packages"
-  exit 1
-fi
+# Navigate to the existing experiment directory
+BASE_DIR=$HOME/Thesis/bachelor-thesis
+cd $BASE_DIR
 
-# Ensure wget is installed
-pip install wget
-if [ $? -ne 0 ]; then
-  echo "Failed to install wget module"
-  exit 1
-fi
-
-# Set wandb API key
-export WANDB_API_KEY=694fb34144778f8ff751adfb317024489e1a077e
-
-# Base directory for the experiment
-mkdir -p experiments
-if [ $? -ne 0 ]; then
-  echo "Failed to create experiments directory"
-  exit 1
-fi
-
-cd experiments
-if [ $? -ne 0 ]; then
-  echo "Failed to change directory to experiments"
-  exit 1
-fi
-
-# Create a unique directory for this run
-run_dir="o$(date +%s)"
-mkdir $run_dir
-if [ $? -ne 0 ]; then
-  echo "Failed to create run directory"
-  exit 1
-fi
-
-cd $run_dir
-if [ $? -ne 0 ]; then
-  echo "Failed to change directory to run directory"
-  exit 1
-fi
-
-# Debugging output
-echo "Current directory after mkdir and cd: $(pwd)"
-echo "Conda environment: $(conda info --envs | grep '*' | awk '{print $1}')"
-date
-
-# Run a simple Python test
-python <<EOF
-import torch
-print("CUDA available:", torch.cuda.is_available())
-EOF
-if [ $? -ne 0 ]; then
-  echo "Python test failed"
-  exit 1
-fi
-
-# Run transformer.py
-if [ -f "/home/ybe320/Thesis/bachelor-thesis/transformer.py" ]; then
-    python /home/ybe320/Thesis/bachelor-thesis/transformer.py --batch_size 32
-    if [ $? -ne 0 ]; then
-        echo "transformer.py execution failed"
-        exit 1
-    fi
-else
-    echo "transformer.py not found"
-    exit 1
-fi
-
-# More debugging output
-echo "Long job script completed"
-date
+# Run the Python script
+python /home/ybe320/Thesis/bachelor-thesis/transformer.py --batch_size 32 --epochs 1000 --lr 0.001

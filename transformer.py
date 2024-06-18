@@ -17,9 +17,9 @@ from torch.utils.tensorboard import SummaryWriter
 
 import numpy as np
 
-
 ### DATA PREPROCESSING ###
 
+wandb.login(key='694fb34144778f8ff751adfb317024489e1a077e')
 def enwik8(path=None, n_train=int(90e6), n_valid=int(5e6), n_test=int(5e6)):
     """
     Load the enwik8 dataset from the Hutter challenge.
@@ -35,7 +35,7 @@ def enwik8(path=None, n_train=int(90e6), n_valid=int(5e6), n_test=int(5e6)):
     
 
     if path is None:
-        path = here('/home/ybe320/Thesis/bachelor-thesis/data/enwik8.gz')
+        path = here('/home/ybe320/Thesis/bachelor-thesis/enwik8.gz')
 
     with gzip.open(path) if path.endswith('.gz') else open(path) as file:
         X = np.fromstring(file.read(n_train + n_valid + n_test), dtype=np.uint8)
@@ -55,7 +55,7 @@ def enwik8_bytes(path=None, split=(90, 5, 5)):
 
 
     if path is None:
-        path = here('/home/ybe320/Thesis/bachelor-thesis/data/enwik8.gz')
+        path = here('/home/ybe320/Thesis/bachelor-thesis/enwik8.gz')
 
     with gzip.open(path, 'r') if path.endswith('.gz') else open(path, 'rb') as file:
         all = file.read()
@@ -83,7 +83,7 @@ def enwik8_string(path=None, split=(90, 5, 5)):
 
 
     if path is None:
-        path = here('/home/ybe320/Thesis/bachelor-thesis/data/enwik8.gz')
+        path = here('/home/ybe320/Thesis/bachelor-thesis/enwik8.gz')
 
     with gzip.open(path, 'rt') if path.endswith('.gz') else open(path, 'r') as file:
         all = file.read()
@@ -221,6 +221,7 @@ def here(subpath=None):
         return os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 
     return os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', subpath))
+
 
 def contains_nan(tensor):
     return bool((tensor != tensor).sum() > 0)
@@ -677,17 +678,18 @@ def main(args):
     print(f'INPUT batches:\n{test_batches_x}\nTARGET batches: \n{test_batches_y}')
 
     #model = Transformer(k=256, heads=4, depth=3, seq_length=256, num_tokens=256, num_classes=256)
-    model = Transformer(**config.model_params)  # TODO ask gpt how to pass model params to model directly
+    # TODO ask gpt how to pass model params to model directly
     # model = Transformer(depth=3, **config)
 
     # Parameters and setup
     model.to(d())
     criterion = nn.NLLLoss()
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
-    batch_size = 32
-    sequence_length = 256
-    print_interval = 10
-    validation_interval = 10
+
+    model = Transformer(**config["model_params"])
+    model.to(d())
+    criterion = nn.NLLLoss()
+    optimizer = optim.Adam(model.parameters(), lr=config["learning_rate"])
 
     # Early stopping and checkpointing setup
     patience = 20  # How many intervals to wait before stopping
@@ -695,9 +697,9 @@ def main(args):
     counter = 0  # Counter for early stopping
 
     # Training loop
-    for current_batch in tqdm(range(args.epochs), desc="Training batches"):
+    for epoch in range(args.epochs):
         model.train()
-        inputs, targets = sample_batch(train_data, length=sequence_length, batch_size=batch_size)
+        inputs, targets = sample_batch(train_data, length=config["sequence_length"], batch_size=config["batch_size"])
         inputs, targets = inputs.to(d()), targets.to(d())
 
         # Forward pass
@@ -709,42 +711,35 @@ def main(args):
         loss.backward()
         optimizer.step()
 
-        if (current_batch + 1) % print_interval == 0:
-            print(f'Batch {current_batch + 1}: Training Loss = {loss.item()}')
+        if (epoch + 1) % config["print_interval"] == 0:
+            print(f'Epoch {epoch + 1}: Training Loss = {loss.item()}')
 
-        wandb.log({
-            "training_loss": loss.item(),
-        })
-        print(f"Loss type: {type(loss.item())}")
+        wandb.log({"training_loss": loss.item()})
 
-        # Validation check
-        if (current_batch + 1) % validation_interval == 0:
-            val_loss, val_accuracy = validate(model, val_data, criterion, batch_size)
-            print(f'Batch {current_batch + 1}: Validation Loss = {val_loss}') #, Accuracy = {val_accuracy}%')
-            wandb.log({
-                "validation_loss": val_loss
-            })
+        if (epoch + 1) % config["validation_interval"] == 0:
+            val_loss, val_accuracy = validate(model, val_data, criterion, config["batch_size"])
+            print(f'Epoch {epoch + 1}: Validation Loss = {val_loss}, Accuracy = {val_accuracy}%')
+            wandb.log({"validation_loss": val_loss, "validation_accuracy": val_accuracy})
 
             # Checkpointing
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
                 torch.save(model.state_dict(), 'best_model.pth')
-                # TODO check how to save this in wandb
+                wandb.save('best_model.pth')  # Save the model to wandb
                 print("Saved best model")
                 counter = 0  # reset the counter
             else:
                 counter += 1
                 if counter >= patience:
                     print("Early stopping")
-                    break  # stop training if validation hasn't improved for 'patience' intervals
+                    break
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--batch_size', type=int, default=32)
     parser.add_argument('--epochs', type=int, default=2000)
-    parser.add_argument('--lr', type=int, default=0.01)
+    parser.add_argument('--lr', type=float, default=0.01)  # Note the change from int to float
 
     args = parser.parse_args()
-
     main(args)
