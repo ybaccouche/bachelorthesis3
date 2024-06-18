@@ -15,8 +15,8 @@ module load cuDNN/cuda12.3
 source $HOME/.bashrc
 conda activate
 
-mkdir $HOME/experiments
-cd $HOME/experiments
+BASE_DIR=$HOME/Thesis/bachelorthesis3
+cd $BASE_DIR
 
 echo $$
 mkdir o`echo $$`
