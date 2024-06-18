@@ -4,7 +4,6 @@
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --partition=defq
-#SBATCH -C <resource name, see below> # this line is usually not needed
 #SBATCH --gres=gpu:1
 
 # Load GPU drivers
