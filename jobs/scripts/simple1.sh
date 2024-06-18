@@ -15,12 +15,12 @@ module load cuDNN/cuda12.3
 source $HOME/.bashrc
 conda activate
 
-BASE_DIR=$HOME/Thesis/bachelorthesis3
+BASE_DIR=$HOME/Thesis/bachelor-thesis3/bachelorthesis3
 cd $BASE_DIR
 
 echo $$
 mkdir o`echo $$`
 cd o`echo $$`
 
-python /home/ybe320/Thesis/bachelorthesis3/transformer.py 
+python /home/ybe320/Thesis/bachelor-thesis3/bachelorthesis3/transformer.py 
 
