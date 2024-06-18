@@ -17,7 +17,7 @@ source $HOME/.bashrc
 conda activate
 
 # Navigate to the existing experiment directory
-BASE_DIR=$HOME/Thesis/bachelorthesis3
+BASE_DIR=$HOME/Thesis/bachelor-thesis3/bachelorthesis3/
 cd $BASE_DIR
 
 # Run the Python script

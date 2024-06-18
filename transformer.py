@@ -83,7 +83,7 @@ def enwik8_string(path=None, split=(90, 5, 5)):
 
 
     if path is None:
-        path = here('/home/ybe320/Thesis/bachelor-thesis3/thesis3/data/enwik8.gz')
+        path = here('/home/ybe320/Thesis/bachelor-thesis3/bachelorthesis3/data/enwik8.gz')
 
     with gzip.open(path, 'rt') if path.endswith('.gz') else open(path, 'r') as file:
         all = file.read()
@@ -682,14 +682,10 @@ def main(args):
     # model = Transformer(depth=3, **config)
 
     # Parameters and setup
-    model.to(d())
-    criterion = nn.NLLLoss()
-    optimizer = optim.Adam(model.parameters(), lr=args.lr)
-
     model = Transformer(**config["model_params"])
     model.to(d())
     criterion = nn.NLLLoss()
-    optimizer = optim.Adam(model.parameters(), lr=config["learning_rate"])
+    optimizer = optim.Adam(model.parameters(), lr=config["learning_rate"]) #lr=args.lr
 
     # Early stopping and checkpointing setup
     patience = 20  # How many intervals to wait before stopping
