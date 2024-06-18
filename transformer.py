@@ -696,7 +696,7 @@ def main(args):
     best_val_loss = float('inf')
     counter = 0  # Counter for early stopping
 
-    # Training loop
+    # Training loopp
     for epoch in range(args.epochs):
         model.train()
         inputs, targets = sample_batch(train_data, length=config["sequence_length"], batch_size=config["batch_size"])
