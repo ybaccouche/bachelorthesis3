@@ -487,17 +487,14 @@ def batcher(data, seq_len, batch_size, num_batches):
 
 ### TRANSFORMER MODEL ###
 
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
 class SelfAttention(nn.Module):
     def __init__(self, input_dim, num_heads, dropout=0.1):
         super(SelfAttention, self).__init__()
         
         self.num_heads = num_heads
-        self.head_dim = input_dim // num_heads
+        self.head_dim = input_dim // num_heads if input_dim % num_heads == 0 else (input_dim // num_heads) + 1
 
+        
         # Linear projections for Q, K, V
         self.W_q = nn.Linear(input_dim, input_dim, bias=False)
         self.W_k = nn.Linear(input_dim, input_dim, bias=False)
@@ -513,7 +510,8 @@ class SelfAttention(nn.Module):
         batch_size = x.size(0)
         seq_len = x.size(1)
         
-        # Linear projections of Q, K, V
+
+        #Linear projections of Q, K, V
         Q = self.W_q(x)
         K = self.W_k(x)
         V = self.W_v(x)
@@ -542,23 +540,23 @@ class TransformerBlock(nn.Module):
         super().__init__()
 
         self.attention = SelfAttention(k, heads, dropout)
-        self.layer_norm1 = nn.LayerNorm(k)
-        self.layer_norm2 = nn.LayerNorm(k)
-
+        self.layer_norm = nn.LayerNorm(k)
         # Feedforward layer
         self.linear1 = nn.Linear(k, 4 * k)
         self.dropout = nn.Dropout(dropout)
         self.linear2 = nn.Linear(4 * k, k)
+        # Layer normalization after feedforward
+        self.layer_norm_ff = nn.LayerNorm(k)
+    
 
     def forward(self, x):
+        x = self.layer_norm(x)
         attention_output = self.attention(x)
-        x = x + attention_output  # Apply residual connection
-        x = self.layer_norm1(x)  # Layer normalization after residual connection
-
+        x = x + attention_output  # Applying residual connection
+        x = self.layer_norm_ff(x)
         ff_output = self.linear2(self.dropout(F.relu(self.linear1(x))))
-        x = x + ff_output  # Apply another residual connection
-        x = self.layer_norm2(x)  # Layer normalization after residual connection
-        return x
+        output = x + ff_output  # Applying another residual connection
+        return output
     
 class Transformer(nn.Module):
     def __init__(self, k, heads, depth, seq_length, num_tokens, num_classes):
@@ -579,12 +577,10 @@ class Transformer(nn.Module):
 
         x = self.tblocks(x)  # Pass through Transformer blocks
 
-        # Pooling strategy (mean pooling)
-        x = x.mean(dim=1)  # Pool over the sequence length
-
-        x = self.output_layer(x)  # [batch_size, num_classes]
-        return F.log_softmax(x, dim=1)
-     
+        x = self.output_layer(x)  # [batch_size, seq_length, num_classes]
+        return F.log_softmax(x, dim=1)  # No pooling here, we need raw outputs per timestep
+    
+ 
     
     def validate(model, data, criterion, batch_size=32, sequence_length=256, num_batches=10):
         model.eval()  # Set the model to evaluation mode
@@ -643,7 +639,6 @@ def validate(model, data, criterion, batch_size=32, sequence_length=256, num_bat
     return avg_loss, accuracy
 
 
-
 # detokenize the model's prediction
 def main(args):
     tics = []
@@ -675,7 +670,7 @@ def main(args):
         project="thesis-project",
         config=config
     )
-    
+
     train_data, val_data, test_data = enwik8()
 
     test_batches_x, test_batches_y = batcher(train_data[:100], seq_len=5, batch_size=3, num_batches=2)
@@ -687,6 +682,9 @@ def main(args):
     # model = Transformer(depth=3, **config)
 
     # Parameters and setup
+    model.to(d())
+    criterion = nn.NLLLoss()
+    optimizer = optim.Adam(model.parameters(), )
 
     model = Transformer(**config["model_params"])
     model.to(d())
