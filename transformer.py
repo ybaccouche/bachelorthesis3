@@ -682,9 +682,6 @@ def main(args):
     # model = Transformer(depth=3, **config)
 
     # Parameters and setup
-    model.to(d())
-    criterion = nn.NLLLoss()
-    optimizer = optim.Adam(model.parameters(), )
 
     model = Transformer(**config["model_params"])
     model.to(d())
