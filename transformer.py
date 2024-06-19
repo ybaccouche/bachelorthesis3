@@ -540,7 +540,8 @@ class TransformerBlock(nn.Module):
         super().__init__()
 
         self.attention = SelfAttention(k, heads, dropout)
-        self.layer_norm = nn.LayerNorm(k)
+        self.layer_norm1 = nn.LayerNorm(k)
+        self.layer_norm2 = nn.LayerNorm(k)
         # Feedforward layer
         self.linear1 = nn.Linear(k, 4 * k)
         self.dropout = nn.Dropout(dropout)
@@ -550,13 +551,13 @@ class TransformerBlock(nn.Module):
     
 
     def forward(self, x):
-        x = self.layer_norm(x)
         attention_output = self.attention(x)
         x = x + attention_output  # Applying residual connection
-        x = self.layer_norm_ff(x)
+        x = self.layer_norm1(x)  # Layer normalization after residual connection
         ff_output = self.linear2(self.dropout(F.relu(self.linear1(x))))
-        output = x + ff_output  # Applying another residual connection
-        return output
+        x = x + ff_output  # Applying another residual connection
+        x = self.layer_norm2(x)  # Layer normalization after residual connection
+        return x
     
 class Transformer(nn.Module):
     def __init__(self, k, heads, depth, seq_length, num_tokens, num_classes):
