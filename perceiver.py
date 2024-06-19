@@ -483,6 +483,10 @@ class PerceiverAttention(nn.Module):
         K = self.W_k(x)
         V = self.W_v(x)
 
+        # Add print statements to check the dimensions
+        print(f"K shape before reshaping: {K.shape}")
+        print(f"Expected shape: ({batch_size}, {seq_len}, {self.num_heads}, {self.head_dim})")
+
         Q = Q.view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
         K = K.view(batch_size, seq_len, self.num_heads, self.head_dim).transpose(1, 2)
         V = V.view(batch_size, seq_len, self.num_heads, self.head_dim).transpose(1, 2)
@@ -530,11 +534,17 @@ class Perceiver(nn.Module):
         for block in self.blocks:
             latent = block(x, latent)
         return self.output_layer(latent.mean(dim=1))
+    
+train_data, val_data, test_data = enwik8()
+
 
 # Example usage:
 model = Perceiver(input_dim=256, latent_dim=512, num_latents=128, heads=8, depth=6, num_classes=256)
 optimizer = torch.optim.AdamW(model.parameters(), lr=0.001, weight_decay=1e-4)
 scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=10, verbose=True)
+# Ensure input data is correctly shaped and converted to float
+inputs, targets = sample_batch(train_data, length=config["sequence_length"], batch_size=config["batch_size"])
+inputs, targets = inputs.to(d()).float(), targets.to(d())
 
 def validate(model, data, criterion, batch_size=32, sequence_length=256, num_batches=10):
     model.eval()
@@ -588,7 +598,6 @@ def main(args):
 
     wandb.init(project="thesis-project", config=config)
 
-    train_data, val_data, test_data = enwik8()
 
     model = Perceiver(**config["model_params"])
     model.to(d())
