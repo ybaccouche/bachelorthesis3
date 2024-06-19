@@ -543,8 +543,7 @@ model = Perceiver(input_dim=256, latent_dim=512, num_latents=128, heads=8, depth
 optimizer = torch.optim.AdamW(model.parameters(), lr=0.001, weight_decay=1e-4)
 scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=10, verbose=True)
 # Ensure input data is correctly shaped and converted to float
-inputs, targets = sample_batch(train_data, length=config["sequence_length"], batch_size=config["batch_size"])
-inputs, targets = inputs.to(d()).float(), targets.to(d())
+
 
 def validate(model, data, criterion, batch_size=32, sequence_length=256, num_batches=10):
     model.eval()
@@ -603,7 +602,8 @@ def main(args):
     model.to(d())
     criterion = nn.NLLLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=config["learning_rate"])
-
+    inputs, targets = sample_batch(train_data, length=config["sequence_length"], batch_size=config["batch_size"])
+    inputs, targets = inputs.to(d()).float(), targets.to(d())
     patience = 20
     best_val_loss = float('inf')
     counter = 0
