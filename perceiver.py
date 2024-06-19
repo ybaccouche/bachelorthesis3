@@ -160,6 +160,8 @@ def sample_batch(data, length, batch_size):
     seqs_target = [data[start + 1:start + length + 1] for start in starts]
     inputs = torch.cat([s[None, :] for s in seqs_inputs], dim=0).to(torch.long).float()  # Convert to float
     target = torch.cat([s[None, :] for s in seqs_target], dim=0).to(torch.long)
+    # Reshape inputs to include input_dim (number of tokens or characters)
+    inputs = inputs.view(batch_size, length, -1)  # Adjust this based on your input data structure
     return inputs, target
 
 def mask_(matrices, maskval=0.0, mask_diagonal=True):
@@ -478,6 +480,10 @@ class PerceiverAttention(nn.Module):
     def forward(self, x, latent, mask=None):
         batch_size = x.size(0)
         seq_len = x.size(1)
+        input_dim = x.size(2)  # Ensure input_dim is inferred from x
+
+        # Verify x has the correct shape
+        assert x.shape == (batch_size, seq_len, input_dim), f"x shape is incorrect: {x.shape}"
 
         Q = self.W_q(latent)
         K = self.W_k(x)
