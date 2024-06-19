@@ -12,6 +12,7 @@ import torch, os, time, math, gzip
 from tqdm import tqdm
 import torch.distributions as dist
 import argparse
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -483,73 +484,97 @@ def batcher(data, seq_len, batch_size, num_batches):
     return x_batches, y_batches
 
 
-class PerceiverAutoregressive(nn.Module):
-    def __init__(self, vocab_size, embed_size, latent_size, num_latent, num_layers, num_heads, num_iterations):
-        super(PerceiverAutoregressive, self).__init__()
-        
-        self.embedding = nn.Embedding(vocab_size, embed_size)
-        self.latents = nn.Parameter(torch.randn(num_latent, latent_size))
-        
-        self.input_to_latent = nn.MultiheadAttention(embed_size, num_heads)
-        self.latent_transformer = nn.TransformerEncoder(
-            nn.TransformerEncoderLayer(latent_size, num_heads, dim_feedforward=latent_size), num_layers
-        )
-        self.latent_to_output = nn.MultiheadAttention(latent_size, num_heads)
-        self.fc_out = nn.Linear(latent_size, vocab_size)
-        
-        self.num_iterations = num_iterations
+class PerceiverAttention(nn.Module):
+    def __init__(self, input_dim, latent_dim, num_heads, dropout=0.1):
+        super(PerceiverAttention, self).__init__()
+        self.num_heads = num_heads
+        self.head_dim = latent_dim // num_heads
 
-    def forward(self, x):
-        batch_size, seq_len = x.size()
-        x = self.embedding(x)  # Shape: (batch_size, seq_len, embed_size)
-        
-        latents = self.latents.unsqueeze(0).expand(batch_size, -1, -1)  # Shape: (batch_size, num_latent, latent_size)
-        
-        for _ in range(self.num_iterations):
-            # Cross-attention: inputs to latents
-            latents, _ = self.input_to_latent(x.permute(1, 0, 2), latents.permute(1, 0, 2), latents.permute(1, 0, 2))
-            latents = latents.permute(1, 0, 2)  # Shape: (batch_size, num_latent, latent_size)
-            
-            # Latent Transformer
-            latents = self.latent_transformer(latents.permute(1, 0, 2)).permute(1, 0, 2)
-        
-        # Cross-attention: latents to output
-        output, _ = self.latent_to_output(latents.permute(1, 0, 2), x.permute(1, 0, 2), x.permute(1, 0, 2))
-        output = output.permute(1, 0, 2)  # Shape: (batch_size, seq_len, latent_size)
-        
-        output = self.fc_out(output)  # Shape: (batch_size, seq_len, vocab_size)
-        
+        self.W_q = nn.Linear(latent_dim, latent_dim, bias=False)
+        self.W_k = nn.Linear(input_dim, latent_dim, bias=False)
+        self.W_v = nn.Linear(input_dim, latent_dim, bias=False)
+
+        self.dropout = nn.Dropout(dropout)
+        self.W_o = nn.Linear(latent_dim, latent_dim)
+
+    def forward(self, x, latent, mask=None):
+        batch_size = x.size(0)
+        seq_len = x.size(1)
+
+        Q = self.W_q(latent)
+        K = self.W_k(x)
+        V = self.W_v(x)
+
+        Q = Q.view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
+        K = K.view(batch_size, seq_len, self.num_heads, self.head_dim).transpose(1, 2)
+        V = V.view(batch_size, seq_len, self.num_heads, self.head_dim).transpose(1, 2)
+
+        scores = torch.matmul(Q, K.transpose(-2, -1)) / torch.sqrt(torch.tensor(self.head_dim, dtype=torch.float32))
+        if mask is not None:
+            scores = scores.masked_fill(mask == 0, float('-inf'))
+        attention_weights = F.softmax(scores, dim=-1)
+        attention_weights = self.dropout(attention_weights)
+        output = torch.matmul(attention_weights, V)
+
+        output = output.transpose(1, 2).contiguous().view(batch_size, -1, self.num_heads * self.head_dim)
+        output = self.W_o(output)
         return output
 
-# Example usage
-vocab_size = 10000
-embed_size = 512
-latent_size = 512
-num_latent = 128
-num_layers = 6
-num_heads = 8
-num_iterations = 6
+class PerceiverBlock(nn.Module):
+    def __init__(self, input_dim, latent_dim, heads, dropout=0.1):
+        super().__init__()
+        self.cross_attention = PerceiverAttention(input_dim, latent_dim, heads, dropout)
+        self.layer_norm1 = nn.LayerNorm(latent_dim)
+        self.layer_norm2 = nn.LayerNorm(latent_dim)
 
-model = PerceiverAutoregressive(vocab_size, embed_size, latent_size, num_latent, num_layers, num_heads, num_iterations)
+        self.linear1 = nn.Linear(latent_dim, 4 * latent_dim)
+        self.dropout = nn.Dropout(dropout)
+        self.linear2 = nn.Linear(4 * latent_dim, latent_dim)
+
+    def forward(self, x, latent):
+        latent = latent + self.cross_attention(x, latent)
+        latent = self.layer_norm1(latent)
+        ff_output = self.linear2(self.dropout(F.relu(self.linear1(latent))))
+        latent = latent + ff_output
+        latent = self.layer_norm2(latent)
+        return latent
+
+class Perceiver(nn.Module):
+    def __init__(self, input_dim, latent_dim, num_latents, heads, depth, num_classes):
+        super().__init__()
+        self.latent = nn.Parameter(torch.randn(1, num_latents, latent_dim))
+        self.blocks = nn.ModuleList([PerceiverBlock(input_dim, latent_dim, heads) for _ in range(depth)])
+        self.output_layer = nn.Linear(latent_dim, num_classes)
+
+    def forward(self, x):
+        batch_size = x.size(0)
+        latent = self.latent.expand(batch_size, -1, -1)
+        for block in self.blocks:
+            latent = block(x, latent)
+        return self.output_layer(latent.mean(dim=1))
+
+# Example usage:
+model = Perceiver(input_dim=256, latent_dim=512, num_latents=128, heads=8, depth=6, num_classes=256)
+optimizer = torch.optim.AdamW(model.parameters(), lr=0.001, weight_decay=1e-4)
+scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=10, verbose=True)
 
 def validate(model, data, criterion, batch_size=32, sequence_length=256, num_batches=10):
-    model.eval()  # Set the model to evaluation mode
+    model.eval()
     total_loss = 0
     total_correct = 0
     total_samples = 0
 
-    with torch.no_grad():  # No need to track gradients during validation
+    with torch.no_grad():
         for _ in range(num_batches):
-            # Generate batches using sample_batch
             inputs, targets = sample_batch(data, length=sequence_length, batch_size=batch_size)
             inputs, targets = inputs.to(d()), targets.to(d())
 
             outputs = model(inputs)
-            outputs = outputs.view(-1, 256)  # Flatten outputs for loss calculation
+            outputs = outputs.view(-1, 256)
             targets = targets.view(-1)
 
             loss = criterion(outputs, targets)
-            total_loss += loss.item() * inputs.size(0)  # Aggregate the loss
+            total_loss += loss.item() * inputs.size(0)
 
             _, predicted = outputs.max(1)
             total_correct += predicted.eq(targets).sum().item()
@@ -559,3 +584,81 @@ def validate(model, data, criterion, batch_size=32, sequence_length=256, num_bat
     avg_loss = total_loss / total_samples
     accuracy = total_correct / total_samples * 100
     return avg_loss, accuracy
+
+def main(args):
+    config = {
+        "learning_rate": args.lr,
+        "architecture": "Perceiver",
+        "dataset": "einwik8",
+        "epochs": args.epochs,
+        "batch_size": args.batch_size,
+        "sequence_length": 256,
+        "print_interval": 100,
+        "validation_interval": 100,
+        "model_params": {
+            "input_dim": 256,
+            "latent_dim": 512,
+            "num_latents": 128,
+            "heads": 8,
+            "depth": 6,
+            "num_classes": 256
+        },
+        "optimizer_params": {
+            "lr": 0.0001
+        },
+    }
+
+    wandb.init(project="thesis-project", config=config)
+
+    train_data, val_data, test_data = enwik8()
+
+    model = Perceiver(**config["model_params"])
+    model.to(d())
+    criterion = nn.NLLLoss()
+    optimizer = torch.optim.Adam(model.parameters(), lr=config["learning_rate"])
+
+    patience = 20
+    best_val_loss = float('inf')
+    counter = 0
+
+    for epoch in range(args.epochs):
+        model.train()
+        inputs, targets = sample_batch(train_data, length=config["sequence_length"], batch_size=config["batch_size"])
+        inputs, targets = inputs.to(d()), targets.to(d())
+
+        optimizer.zero_grad()
+        output = model(inputs)
+        output = output.view(-1, 256)
+        targets = targets.view(-1)
+        loss = criterion(output, targets)
+        loss.backward()
+        optimizer.step()
+
+        if (epoch + 1) % config["print_interval"] == 0:
+            print(f'Epoch {epoch + 1}: Training Loss = {loss.item()}')
+        wandb.log({"training_loss": loss.item()})
+
+        if (epoch + 1) % config["validation_interval"] == 0:
+            val_loss, val_accuracy = validate(model, val_data, criterion, config["batch_size"])
+            print(f'Epoch {epoch + 1}: Validation Loss = {val_loss}, Accuracy = {val_accuracy}%')
+            wandb.log({"validation_loss": val_loss, "validation_accuracy": val_accuracy})
+
+            if val_loss < best_val_loss:
+                best_val_loss = val_loss
+                torch.save(model.state_dict(), 'best_model.pth')
+                wandb.save('best_model.pth')
+                print("Saved best model")
+                counter = 0
+            else:
+                counter += 1
+                if counter >= patience:
+                    print("Early stopping")
+                    break
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--batch_size', type=int, default=32)
+    parser.add_argument('--epochs', type=int, default=2000)
+    parser.add_argument('--lr', type=float, default=0.01)
+    args = parser.parse_args()
+    main(args)
