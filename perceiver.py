@@ -485,17 +485,18 @@ class PerceiverAttention(nn.Module):
         # Verify x has the correct shape
         assert x.shape == (batch_size, seq_len, input_dim), f"x shape is incorrect: {x.shape}"
 
+        # Flatten x for the linear layer
+        x = x.view(batch_size * seq_len, -1)
+
         Q = self.W_q(latent)
         K = self.W_k(x)
         V = self.W_v(x)
 
-        # Add print statements to check the dimensions
-        print(f"K shape before reshaping: {K.shape}")
-        print(f"Expected shape: ({batch_size}, {seq_len}, {self.num_heads}, {self.head_dim})")
-
-        Q = Q.view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
+        # Reshape K and V back to [batch_size, seq_len, num_heads, head_dim]
         K = K.view(batch_size, seq_len, self.num_heads, self.head_dim).transpose(1, 2)
         V = V.view(batch_size, seq_len, self.num_heads, self.head_dim).transpose(1, 2)
+
+        Q = Q.view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
 
         scores = torch.matmul(Q, K.transpose(-2, -1)) / torch.sqrt(torch.tensor(self.head_dim, dtype=torch.float32))
         if mask is not None:
