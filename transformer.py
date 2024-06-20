@@ -482,6 +482,8 @@ def batcher(data, seq_len, batch_size, num_batches):
 
     return x_batches, y_batches
 
+def detokenize(tokens):
+    return ''.join([chr(token) for token in tokens])
 
 ### DATA PREPROCESSING COMPLETE ###
 
@@ -581,42 +583,11 @@ class Transformer(nn.Module):
         x = self.output_layer(x)  # [batch_size, seq_length, num_classes]
         return F.log_softmax(x, dim=1)  # No pooling here, we need raw outputs per timestep
     
- 
-    
-    def validate(model, data, criterion, batch_size=32, sequence_length=256, num_batches=10):
-        model.eval()  # Set the model to evaluation mode
-        total_loss = 0
-        total_correct = 0
-        total_samples = 0
-        with torch.no_grad():  # No need to track gradients during validation
-            for _ in range(num_batches):
-                # Generate batches using sample_batch
-                inputs, targets = sample_batch(data, length=sequence_length, batch_size=batch_size)
-                inputs, targets = inputs.to(d()), targets.to(d())
-
-                outputs = model(inputs)
-                outputs = outputs.view(-1, 256)  # Flatten outputs for loss calculation
-                targets = targets.view(-1)
-
-                loss = criterion(outputs, targets)
-                total_loss += loss.item() * inputs.size(0)  # Aggregate the loss
-
-                _, predicted = outputs.max(1)
-                total_correct += predicted.eq(targets).sum().item()
-                total_samples += inputs.size(0)
-                print(f"Predicted: {predicted[:10]}, True: {targets[:10]}")
-                # TODO detokenise output to make it human readable (GPT)
-
-        avg_loss = total_loss / total_samples
-        accuracy = total_correct / total_samples * 100
-        return avg_loss, accuracy
-
 def validate(model, data, criterion, batch_size=32, sequence_length=256, num_batches=10):
     model.eval()  # Set the model to evaluation mode
     total_loss = 0
     total_correct = 0
     total_samples = 0
-
     with torch.no_grad():  # No need to track gradients during validation
         for _ in range(num_batches):
             # Generate batches using sample_batch
@@ -634,11 +605,12 @@ def validate(model, data, criterion, batch_size=32, sequence_length=256, num_bat
             total_correct += predicted.eq(targets).sum().item()
             total_samples += inputs.size(0)
             print(f"Predicted: {predicted[:10]}, True: {targets[:10]}")
+            print(f"Predicted: {detokenize(predicted[:10].tolist())}, True: {detokenize(targets[:10].tolist())}")
+            # TODO detokenise output to make it human readable (GPT)
 
-    avg_loss = total_loss / total_samples
-    accuracy = total_correct / total_samples * 100
-    return avg_loss, accuracy
-
+        avg_loss = total_loss / total_samples
+        accuracy = total_correct / total_samples * 100
+        return avg_loss, accuracy
 
 # detokenize the model's prediction
 def main(args):
