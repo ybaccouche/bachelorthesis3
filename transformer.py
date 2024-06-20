@@ -482,8 +482,6 @@ def batcher(data, seq_len, batch_size, num_batches):
 
     return x_batches, y_batches
 
-def detokenize(tokens):
-    return ''.join([chr(token) for token in tokens])
 
 ### DATA PREPROCESSING COMPLETE ###
 
@@ -599,13 +597,12 @@ def validate(model, data, criterion, batch_size=32, sequence_length=256, num_bat
             targets = targets.view(-1)
 
             loss = criterion(outputs, targets)
-            total_loss += loss.item() * inputs.size(0)  # Aggregate the loss
+            total_loss += loss.item() * targets.size(0)  # Aggregate the loss
 
             _, predicted = outputs.max(1)
             total_correct += predicted.eq(targets).sum().item()
-            total_samples += inputs.size(0)
+            total_samples += targets.size(0)
             print(f"Predicted: {predicted[:10]}, True: {targets[:10]}")
-            print(f"Predicted: {detokenize(predicted[:10].tolist())}, True: {detokenize(targets[:10].tolist())}")
             # TODO detokenise output to make it human readable (GPT)
 
         avg_loss = total_loss / total_samples
