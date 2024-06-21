@@ -624,7 +624,7 @@ def main(args):
         "batch_size": args.batch_size,
         "sequence_length": 128,
         "print_interval": 100,
-        "validation_interval": 500,
+        "validation_interval": 100,
         "model_params": {
             "k": 512,
             "heads": args.heads,
