@@ -660,7 +660,7 @@ def main(args):
     model.to(d())
     criterion = nn.NLLLoss()
     optimizer = optim.Adam(model.parameters(), lr=config["learning_rate"]) #lr=args.lr
-    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=500, verbose=True)
+    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=500)
     # Early stopping and checkpointing setup
     patience = 20  # How many intervals to wait before stopping
     best_val_loss = float('inf')
@@ -693,6 +693,10 @@ def main(args):
 
             # Step the scheduler
             scheduler.step(val_loss)
+
+            current_lr = scheduler.optimizer.param_groups[0]['lr']
+            print(f'Epoch {epoch + 1}: Current Learning Rate = {current_lr}')
+            wandb.log({"learning_rate": current_lr})
 
             # Checkpointing
             if val_loss < best_val_loss:

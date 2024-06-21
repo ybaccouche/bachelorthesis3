@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=work_pls                      # Job name
-#SBATCH --time=00:01:00                     # Time limit hrs:min:sec
+#SBATCH --time=00:15:00                     # Time limit hrs:min:sec
 #SBATCH -N 1                                 # Number of nodes
 #SBATCH --ntasks-per-node=1                  # Number of tasks per node
 #SBATCH --partition=defq   # Partition name
@@ -21,4 +21,4 @@ BASE_DIR=$HOME/Thesis/bachelor-thesis3/bachelorthesis3/
 cd $BASE_DIR
 
 # Run the Python script
-python /home/ybe320/Thesis/bachelor-thesis3/bachelorthesis3/transformer.py --batch_size 64 --epochs 10 --lr 0.001 --heads 8 --depth 16
+python /home/ybe320/Thesis/bachelor-thesis3/bachelorthesis3/transformer.py --batch_size 64 --epochs 600 --lr 0.001 --heads 8 --depth 16
