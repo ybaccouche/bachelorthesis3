@@ -12,6 +12,7 @@ import torch, os, time, math, gzip
 from tqdm import tqdm
 import torch.distributions as dist
 import argparse
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -605,8 +606,7 @@ def validate(model, data, criterion, batch_size=32, sequence_length=256, num_bat
             _, predicted = outputs.max(1)
             total_correct += predicted.eq(targets).sum().item()
             total_samples += targets.size(0)
-            print(f"Predicted: {detokenize(predicted[:10])}, True: {detokenize(targets[:10])}")
-            # TODO detokenise output to make it human readable (GPT)
+            print(f"Predicted: {detokenize(predicted[:50])}, True: {detokenize(targets[:50])}")
 
         avg_loss = total_loss / total_samples
         accuracy = total_correct / total_samples * 100
@@ -622,14 +622,14 @@ def main(args):
         "dataset": "einwik8",
         "epochs": args.epochs,
         "batch_size": args.batch_size,
-        "sequence_length": 256,
+        "sequence_length": 128,
         "print_interval": 100,
-        "validation_interval": 100,
+        "validation_interval": 500,
         "model_params": {
             "k": 512,
-            "heads": 8,
-            "depth": 6,
-            "seq_length": 256,
+            "heads": args.heads,
+            "depth": args.depth,
+            "seq_length": 128,
             "num_tokens": 256,
             "num_classes": 256
         },
@@ -660,7 +660,7 @@ def main(args):
     model.to(d())
     criterion = nn.NLLLoss()
     optimizer = optim.Adam(model.parameters(), lr=config["learning_rate"]) #lr=args.lr
-
+    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=500, verbose=True)
     # Early stopping and checkpointing setup
     patience = 20  # How many intervals to wait before stopping
     best_val_loss = float('inf')
@@ -691,6 +691,9 @@ def main(args):
             print(f'Epoch {epoch + 1}: Validation Loss = {val_loss}, Accuracy = {val_accuracy}%')
             wandb.log({"validation_loss": val_loss, "validation_accuracy": val_accuracy})
 
+            # Step the scheduler
+            scheduler.step(val_loss)
+
             # Checkpointing
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
@@ -708,8 +711,10 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--batch_size', type=int, default=32)
-    parser.add_argument('--epochs', type=int, default=2000)
-    parser.add_argument('--lr', type=float, default=0.01)  # Note the change from int to float
+    parser.add_argument('--epochs', type=int, default=1000)
+    parser.add_argument('--lr', type=float, default=0.01)  
+    parser.add_argument('--heads', type=int, default=4) 
+    parser.add_argument('--depth', type=int, default=6)  
 
     args = parser.parse_args()
     main(args)
