@@ -12,7 +12,6 @@ import torch, os, time, math, gzip
 from tqdm import tqdm
 import torch.distributions as dist
 import argparse
-from torch_lr_finder import LRFinder
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -658,11 +657,6 @@ def main(args):
     model.to(d())
     criterion = nn.NLLLoss()
     optimizer = optim.Adam(model.parameters(), lr=config["learning_rate"]) #lr=args.lr
-    lr_finder = LRFinder(model, optimizer, criterion, device="cuda")
-    lr_finder.range_test(train_data, end_lr=0.1, num_iter=200)
-
-    lr_finder.plot()  # To plot the loss vs learning rate
-    lr_finder.reset()
 
     # Early stopping and checkpointing setup
     patience = 1000  # How many intervals to wait before stopping
