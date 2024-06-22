@@ -631,7 +631,7 @@ def main(args):
             "num_classes": 256
         },
         "optimizer_params": {
-            "lr": 0.0001
+            "lr": 0.001
         },
     }
 
@@ -680,13 +680,12 @@ def main(args):
 
         if (epoch + 1) % config["print_interval"] == 0:
             print(f'Epoch {epoch + 1}: Training Loss = {loss.item()}')
-            wandb.log({"training_loss": loss.item()})
+        
+        wandb.log({"training_loss": loss.item()})
 
         if (epoch + 1) % config["validation_interval"] == 0:
             val_loss, val_accuracy = validate(model, val_data, criterion, config["batch_size"])
             print(f'Epoch {epoch + 1}: Validation Loss = {val_loss}, Accuracy = {val_accuracy}%')
-            wandb.log({"validation_loss": val_loss, "validation_accuracy": val_accuracy})
-
 
             # Checkpointing
             if val_loss < best_val_loss:
@@ -700,15 +699,16 @@ def main(args):
                 if counter >= patience:
                     print("Early stopping")
                     break
+        wandb.log({"validation_loss": val_loss, "validation_accuracy": val_accuracy})
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--batch_size', type=int, default=32)
+    parser.add_argument('--batch_size', type=int, default=200)
     parser.add_argument('--epochs', type=int, default=1000)
-    parser.add_argument('--lr', type=float, default=0.01)  
-    parser.add_argument('--heads', type=int, default=4) 
-    parser.add_argument('--depth', type=int, default=6)  
+    parser.add_argument('--lr', type=float, default=0.001)  
+    parser.add_argument('--heads', type=int, default=8) 
+    parser.add_argument('--depth', type=int, default=12)  
 
     args = parser.parse_args()
     main(args)
