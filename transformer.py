@@ -603,7 +603,7 @@ def validate(model, data, criterion, batch_size=32, sequence_length=256, num_bat
             _, predicted = outputs.max(1)
             total_correct += predicted.eq(targets).sum().item()
             total_samples += targets.size(0)
-            print(f"Predicted: {(predicted[:50])}, True: {(targets[:50])}")
+            print(f"Predicted: {detokenize(predicted[:50])}, True: {detokenize(targets[:50])}")
 
         avg_loss = total_loss / total_samples
         accuracy = total_correct / total_samples * 100
