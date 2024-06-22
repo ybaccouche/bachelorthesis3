@@ -619,14 +619,14 @@ def main(args):
         "dataset": "einwik8",
         "epochs": args.epochs,
         "batch_size": args.batch_size,
-        "sequence_length": 128,
+        "sequence_length": 256,
         "print_interval": 100,
         "validation_interval": 100,
         "model_params": {
             "k": 256,
             "heads": args.heads,
             "depth": args.depth,
-            "seq_length": 128,
+            "seq_length": 256,
             "num_tokens": 256,
             "num_classes": 256
         },
