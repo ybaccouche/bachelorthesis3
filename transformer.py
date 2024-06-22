@@ -550,8 +550,6 @@ class TransformerBlock(nn.Module):
         self.linear1 = nn.Linear(k, 4 * k)
         self.dropout = nn.Dropout(dropout)
         self.linear2 = nn.Linear(4 * k, k)
-        # Layer normalization after feedforward
-        self.layer_norm_ff = nn.LayerNorm(k)
     
 
     def forward(self, x):
@@ -626,7 +624,7 @@ def main(args):
         "print_interval": 100,
         "validation_interval": 100,
         "model_params": {
-            "k": 512,
+            "k": 256,
             "heads": args.heads,
             "depth": args.depth,
             "seq_length": 128,
