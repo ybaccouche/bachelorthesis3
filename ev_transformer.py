@@ -310,12 +310,12 @@ for i in range(num_batches):
 
       val_loss = estimate_val_loss(model)
 
-      wandb.log({'train loss':loss.item(), 'validation loss': val_loss.item()})
+      wandb.log({'train loss':loss.item(), 'validation loss': val_loss.item(), '_step': i + 1})
 
       if val_loss < best_val_loss:
         best_val_loss = val_loss
 
-        torch.save(model.state_dict(), '<my_model_name>.pt')
+        torch.save(model.state_dict(), 'Transformer_longrun.pt')
 
 
   if i == 0 or (i + 1) % sample_interval == 0:
