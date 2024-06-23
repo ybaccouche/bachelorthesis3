@@ -184,7 +184,7 @@ learning_rate = 0.001
 seq_length = 256 # no. of chars per training sequence
 batch_size = 200 # no. of text sequences per batch
 num_batches = 120000 # no. of batches to train on 
-log_interval = 1000 # num batches b/w logging training progress
+log_interval = 100 # num batches b/w logging training progress
 
 embed_size = 128
 vocab_size = 241 # data chars 9 - 240
@@ -205,7 +205,7 @@ sample_interval = 5000 # num batches b/w sampling while training
 def sampler(model):
 
   rand_idx = random.randint(0, val_data.size(0) - seq_length)
-  seed = val_data[rand_idx: rand_idx + seq_length].to(torch.long).to(device)
+  seed = val_data[rand_idx: rand_idx + seq_length].to(torch.long).to(device)  
 
   seed_text = tokens_to_string(seed)
   print(f'\n[SEED]: {seed_text[:128]}\n\t{seed_text[128:]}')
