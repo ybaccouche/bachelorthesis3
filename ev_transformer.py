@@ -182,8 +182,8 @@ wandb.init(  # set the wandb project where this run will be logged
 learning_rate = 0.001
 
 seq_length = 256 # no. of chars per training sequence
-batch_size = 200 # no. of text sequences per batch
-num_batches = 40000 # no. of batches to train on 
+batch_size = 32 # no. of text sequences per batch
+num_batches = 100000 # no. of batches to train on 
 log_interval = 100 # num batches b/w logging training progress
 
 embed_size = 128
