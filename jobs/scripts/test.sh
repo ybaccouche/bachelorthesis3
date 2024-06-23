@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=work_pls                      # Job name
-#SBATCH --time18:00:00                     # Time limit hrs:min:sec
+#SBATCH --time00:01:00                     # Time limit hrs:min:sec
 #SBATCH -N 1                                 # Number of nodes
 #SBATCH --ntasks-per-node=1                  # Number of tasks per node
 #SBATCH --partition=defq   # Partition name
