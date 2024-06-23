@@ -183,7 +183,7 @@ learning_rate = 0.001
 
 seq_length = 256 # no. of chars per training sequence
 batch_size = 200 # no. of text sequences per batch
-num_batches = 120000 # no. of batches to train on 
+num_batches = 40000 # no. of batches to train on 
 log_interval = 100 # num batches b/w logging training progress
 
 embed_size = 128
@@ -198,7 +198,7 @@ sampling_temp = 0.8 # for scaling predicted probs for next char
 sample_length = 600 # length of text to sample/generate
 nchars_compression = 10000 # num of chars to predict for estimating compression
 
-sample_interval = 5000 # num batches b/w sampling while training
+sample_interval = 500 # num batches b/w sampling while training
 
 
 # SAMPLE a continuation for a random seed
@@ -299,7 +299,7 @@ for i in range(num_batches):
 
   opt.step()
   sch.step()
-
+  
   if i == 0 or (i + 1) % log_interval == 0:
 
     print(f'(batch {i+1:6d}) train loss: {loss.item():.4f}')
