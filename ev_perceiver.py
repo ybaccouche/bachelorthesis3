@@ -181,7 +181,7 @@ wandb.init(  # set the wandb project where this run will be logged
 # TRAINING
 # ~48 hours for 120k batches (~23 mins per 1000 batches on TitanX)
 
-learning_rate = 0.001
+learning_rate = 0.0001
 
 seq_length = 256  # no. of chars per training sequence
 batch_size = 32  # no. of text sequences per batch
