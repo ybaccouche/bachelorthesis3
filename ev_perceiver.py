@@ -131,30 +131,43 @@ class PerceiverBlock(nn.Module):
         ff = self.feedforward(latents)
         return latents + self.drop(ff)
 
+class PositionalEncoding(nn.Module):
+    def __init__(self, emb_size, max_seq_length):
+        super().__init__()
+        self.max_length = max_seq_length
+        pos_enc = torch.zeros(self.max_length, emb_size)
+        position = torch.arange(0, self.max_length).unsqueeze(1)
+        div_term = torch.exp(torch.arange(0, emb_size, 2) * (-math.log(10000.0) / emb_size))
+        pos_enc[:, 0::2] = torch.sin(position * div_term)
+        pos_enc[:, 1::2] = torch.cos(position * div_term)
+        pos_enc = pos_enc.unsqueeze(0)
+        self.register_buffer('pos_enc', pos_enc, persistent=False)
+
+    def forward(self, x):
+        x = x + self.pos_enc[:, :x.size(1)]
+        return x
 
 class Perceiver(nn.Module):
-    def __init__(self, vocab_size, input_dim, latent_dim, num_latents, nblocks, nheads, dropout, ff_hidden):
+    def __init__(self, vocab_size, emb_size, max_seq_length, latent_dim, num_latents, nblocks, nheads, dropout, ff_hidden):
         super().__init__()
-
-        self.embedding_layer = nn.Embedding(vocab_size, input_dim)
+        self.embedding_layer = nn.Embedding(vocab_size, emb_size)
+        self.pos_encoder = PositionalEncoding(emb_size, max_seq_length)
         self.latents = nn.Parameter(torch.randn(1, num_latents, latent_dim))
-
         self.perceiver_blocks = nn.ModuleList(
-            [PerceiverBlock(latent_dim, input_dim, nheads, dropout, ff_hidden) for _ in range(nblocks)]
+            [PerceiverBlock(emb_size, latent_dim, nheads, dropout, ff_hidden) for _ in range(nblocks)]
         )
-
         self.to_logits = nn.Linear(latent_dim, vocab_size)
 
     def forward(self, x):
-        x = self.embedding_layer(x)
         batch_size = x.size(0)
-        latents = self.latents.expand(batch_size, -1, -1)
-
-        for block in self.perceiver_blocks:
-            latents = block(latents, x)
-
-        y = self.to_logits(latents)  # Produce logits for each latent
-        return y  # Return logits for each position in the sequence
+        x = self.embedding_layer(x)
+        x = self.pos_encoder(x)
+        latent = self.latents.expand(batch_size, -1, -1)
+        for perceiver_block in self.perceiver_blocks:
+            latent = perceiver_block(x, latent)
+        y = self.to_logits(latent)
+        lg_probs = F.log_softmax(y, dim=-1)
+        return lg_probs
 
 wandb.login(key='694fb34144778f8ff751adfb317024489e1a077e')
 # NEW W&B RUN
@@ -219,6 +232,7 @@ def sampler(model):
 
 # COMPRESSION
 def estimate_compression(model, batch_num):
+    model.eval()
     rand_idxs = random.sample(range(1, len(val_data)), k=nchars_compression)
 
     buffer = []
@@ -241,17 +255,15 @@ def estimate_compression(model, batch_num):
         if len(buffer) == 2 * batch_size or idx == rand_idxs[-1]:
             contexts = torch.stack(buffer, dim=0).to(device)
             preds = model(contexts)
-
             nat_log_probs = preds[torch.arange(len(buffer)), ctx_idxs, target_chars]
             log_2_probs = nat_log_probs / math.log(2.0)
-            total_bits += -log_2_probs.sum()
+            total_bits += -log_2_probs.sum().item()
 
             buffer, ctx_idxs, target_chars = [], [], []
 
     bpc = total_bits / nchars_compression
 
     print(f'BITS PER CHAR after {batch_num} batches: {bpc:.2f}\n')
-
     wandb.log({'bits per character': bpc})
 
 
@@ -279,33 +291,25 @@ for i in range(num_batches):
     inputs, targets = batcher(train_data, seq_length, batch_size)
 
     outputs = model(inputs)
-    outputs = outputs.view(-1, outputs.size(-1))
-    targets = targets.view(-1)
-    loss = F.nll_loss(F.log_softmax(outputs, dim=-1), targets, reduction='mean')
+    loss = F.nll_loss(outputs.transpose(2, 1), targets, reduction='mean')
 
     loss.backward()
-
     clip_grad_norm_(model.parameters(), max_norm=1.0)
-
     opt.step()
     sch.step()
-
+    
     if i == 0 or (i + 1) % log_interval == 0:
-        print(f'(batch {i + 1:6d}) train loss: {loss.item():.4f}')
-
+        print(f'(batch {i+1:6d}) train loss: {loss.item():.4f}')
         model.eval()
-
         with torch.no_grad():
             val_loss = estimate_val_loss(model)
             wandb.log({'train loss': loss.item(), 'validation loss': val_loss.item(), '_step': i + 1})
-
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
-                torch.save(model.state_dict(), 'Perceiver_longrun.pt')
+                torch.save(model.state_dict(), 'Perceiver_best.pt')
 
     if i == 0 or (i + 1) % sample_interval == 0:
         model.eval()
-
         with torch.no_grad():
             sampler(model)
             estimate_compression(model, i + 1)

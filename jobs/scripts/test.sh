@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=final_training                     # Job name
-#SBATCH --time=02:15:00                     # Time limit hrs:min:sec
+#SBATCH --time=12:00:00                     # Time limit hrs:min:sec
 #SBATCH -N 1                                 # Number of nodes
 #SBATCH --ntasks-per-node=1                  # Number of tasks per node
 #SBATCH --partition=defq   # Partition name
