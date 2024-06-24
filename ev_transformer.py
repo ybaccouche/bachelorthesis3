@@ -183,8 +183,8 @@ learning_rate = 0.001
 
 seq_length = 256 # no. of chars per training sequence
 batch_size = 32 # no. of text sequences per batch
-num_batches = 500 # no. of batches to train on 
-log_interval = 100 # num batches b/w logging training progress
+num_batches = 200000 # no. of batches to train on 
+log_interval = 500 # num batches b/w logging training progress
 
 embed_size = 128
 vocab_size = 241 # data chars 9 - 240
@@ -198,7 +198,7 @@ sampling_temp = 0.8 # for scaling predicted probs for next char
 sample_length = 600 # length of text to sample/generate
 nchars_compression = 10000 # num of chars to predict for estimating compression
 
-sample_interval = 500 # num batches b/w sampling while training
+sample_interval = 10000 # num batches b/w sampling while training
 
 
 # SAMPLE a continuation for a random seed
