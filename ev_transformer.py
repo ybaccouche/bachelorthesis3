@@ -4,9 +4,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.distributions as dist
 
-from torch.optim import Adam
+from torch.optim import AdamW
 from torch.nn.utils import clip_grad_norm_
 from torch.optim.lr_scheduler import CosineAnnealingLR
+import torch.nn.init as init
 
 import numpy as np
 import math, random, gzip
@@ -47,7 +48,6 @@ def batcher(data, seq_length, batch_size):
   batch = torch.stack([data[i: i + seq_length + 1] for i in idxs], dim=0)
 
   return batch[:, :-1].to(torch.long).to(device), batch[:, 1:].to(torch.long).to(device) # shift 1 char right for targets
-
 
 
 # MULTI-HEAD ATTENTION
@@ -173,13 +173,23 @@ wandb.init(  # set the wandb project where this run will be logged
         project="thesis-project"
     )
 
+def kaiming_init_weights(model):
+    if isinstance(model, nn.Linear):
+        init.kaiming_uniform_(model.weight, nonlinearity='relu')
+        if model.bias is not None:
+            init.constant_(model.bias, 0)
+    elif isinstance(model, nn.Embedding):
+        init.uniform_(model.weight, -0.1, 0.1)
+    elif isinstance(model, nn.LayerNorm):
+        init.constant_(model.bias, 0)
+        init.constant_(model.weight, 1.0)
 
 # HYPERPARAMS
 
 # TRAINING
 # ~48 hours for 120k batches (~23 mins per 1000 batches on TitanX)
 
-learning_rate = 0.001
+learning_rate = 0.0001
 
 seq_length = 256 # no. of chars per training sequence
 batch_size = 32 # no. of text sequences per batch
@@ -189,7 +199,7 @@ log_interval = 500 # num batches b/w logging training progress
 embed_size = 128
 vocab_size = 241 # data chars 9 - 240
 nblocks, nheads = 12, 8 # no. of transformer blocks, and attn heads
-dropout = 0.1 # dropout probability
+dropout = 0.2 # dropout probability
 ff_hidden = 4 * embed_size # size of feedforward hidden layer in transf blocks
 mask = True # whether to apply causal masking
 
@@ -277,8 +287,8 @@ def estimate_val_loss(model):
 
 # TRAINING
 model = Transformer(vocab_size, embed_size, seq_length, nblocks, nheads, dropout, ff_hidden, mask).to(device)
-
-opt = Adam(params=model.parameters(), lr=learning_rate)
+model.apply(kaiming_init_weights)
+opt = AdamW(params=model.parameters(), lr=learning_rate, weight_decay=0.01)
 sch = CosineAnnealingLR(opt, T_max=num_batches, eta_min=learning_rate/1000) # learning rate scheduler
 
 best_val_loss = float('inf')

@@ -7,6 +7,7 @@ import torch.distributions as dist
 from torch.optim import Adam
 from torch.nn.utils import clip_grad_norm_
 from torch.optim.lr_scheduler import CosineAnnealingLR
+import torch.nn.init as init
 
 import numpy as np
 import math, random, gzip
