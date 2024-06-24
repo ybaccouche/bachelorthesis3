@@ -277,8 +277,7 @@ def estimate_val_loss(model):
 
 
 # TRAINING
-model = Perceiver(vocab_size, input_dim, latent_dim, num_latents, nblocks, nheads, dropout, ff_hidden).to(device)
-
+model = Perceiver(vocab_size, input_dim, seq_length, latent_dim, num_latents, nblocks, nheads, dropout, ff_hidden).to(device)
 opt = Adam(params=model.parameters(), lr=learning_rate)
 sch = CosineAnnealingLR(opt, T_max=num_batches, eta_min=learning_rate / 1000)  # learning rate scheduler
 
