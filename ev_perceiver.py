@@ -4,13 +4,14 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.distributions as dist
 
-from torch.optim import Adam
+from torch.optim import AdamW
 from torch.nn.utils import clip_grad_norm_
 from torch.optim.lr_scheduler import CosineAnnealingLR
 import torch.nn.init as init
 
 import numpy as np
 import math, random, gzip
+import argparse
 
 # use GPU
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -176,26 +177,65 @@ wandb.init(  # set the wandb project where this run will be logged
     project="thesis-project"
 )
 
-
+def kaiming_init_weights(model):
+    if isinstance(model, nn.Linear):
+        init.kaiming_uniform_(model.weight, nonlinearity='relu')
+        if model.bias is not None:
+            init.constant_(model.bias, 0)
+    elif isinstance(model, nn.Embedding):
+        init.uniform_(model.weight, -0.1, 0.1)
+    elif isinstance(model, nn.LayerNorm):
+        init.constant_(model.bias, 0)
+        init.constant_(model.weight, 1.0)
+        
 # HYPERPARAMS
+parser = argparse.ArgumentParser(description='Perceiver Model')
+parser.add_argument('--learning_rate', type=float, default=0.0001, help='learning rate for training')
+parser.add_argument('--seq_length', type=int, default=256, help='number of characters per training sequence')
+parser.add_argument('--batch_size', type=int, default=32, help='number of text sequences per batch')
+parser.add_argument('--num_batches', type=int, default=100000, help='number of batches to train on')
+parser.add_argument('--log_interval', type=int, default=500, help='number of batches between logging training progress')
+parser.add_argument('--input_dim', type=int, default=128, help='input dimension')
+parser.add_argument('--latent_dim', type=int, default=128, help='latent dimension')
+parser.add_argument('--vocab_size', type=int, default=241, help='vocabulary size')
+parser.add_argument('--nblocks', type=int, default=12, help='number of perceiver blocks')
+parser.add_argument('--nheads', type=int, default=8, help='number of attention heads')
+parser.add_argument('--dropout', type=float, default=0.1, help='dropout probability')
+parser.add_argument('--ff_hidden', type=int, default=512, help='size of feedforward hidden layer in perceiver blocks')
+parser.add_argument('--num_latents', type=int, default=256, help='number of latents')
+args = parser.parse_args()
+
+learning_rate = args.learning_rate
+seq_length = args.seq_length
+batch_size = args.batch_size
+num_batches = args.num_batches
+log_interval = args.log_interval
+input_dim = args.input_dim
+latent_dim = args.latent_dim
+vocab_size = args.vocab_size
+nblocks = args.nblocks
+nheads = args.nheads
+dropout = args.dropout
+ff_hidden = args.ff_hidden
+num_latents = args.num_latents
 
 # TRAINING
 # ~48 hours for 120k batches (~23 mins per 1000 batches on TitanX)
 
-learning_rate = 0.0001
+#learning_rate = 0.0001
 
-seq_length = 256  # no. of chars per training sequence
-batch_size = 32  # no. of text sequences per batch
-num_batches = 20000  # no. of batches to train on
-log_interval = 500  # num batches b/w logging training progress
+#seq_length = 256  # no. of chars per training sequence
+#batch_size = 32  # no. of text sequences per batch
+#num_batches = 100000  # no. of batches to train on
+#log_interval = 500  # num batches b/w logging training progress
 
-input_dim = 128
-latent_dim = 128
-vocab_size = 241  # data chars 9 - 240
-nblocks, nheads = 12, 8  # no. of perceiver blocks, and attn heads
-dropout = 0.1  # dropout probability
-ff_hidden = 4 * latent_dim  # size of feedforward hidden layer in perceiver blocks
-num_latents = 256  # number of latents
+#input_dim = 128
+#latent_dim = 128
+#vocab_size = 241  # data chars 9 - 240
+#nblocks, nheads = 12, 8  # no. of perceiver blocks, and attn heads
+#dropout = 0.1  # dropout probability
+#ff_hidden = 4 * latent_dim  # size of feedforward hidden layer in perceiver blocks
+#num_latents = 256  # number of latents
 
 # VALIDATION
 sampling_temp = 0.8  # for scaling predicted probs for next char
@@ -279,7 +319,8 @@ def estimate_val_loss(model):
 
 # TRAINING
 model = Perceiver(vocab_size, input_dim, seq_length, latent_dim, num_latents, nblocks, nheads, dropout, ff_hidden).to(device)
-opt = Adam(params=model.parameters(), lr=learning_rate)
+model.apply(kaiming_init_weights)
+opt = AdamW(params=model.parameters(), lr=learning_rate, weight_decay=0.01)
 sch = CosineAnnealingLR(opt, T_max=num_batches, eta_min=learning_rate / 1000)  # learning rate scheduler
 
 best_val_loss = float('inf')
