@@ -110,7 +110,8 @@ class PerceiverBlock(nn.Module):
     def __init__(self, latent_dim, input_dim, nheads, dropout, ff_hidden):
         super().__init__()
         self.cross_attention = CrossAttention(latent_dim, input_dim, nheads)
-        self.self_attention = _attention = SelfAttention(latent_dim, nheads)
+        self.self_attention = SelfAttention(latent_dim, nheads)
+
         self.layer_norm_1 = nn.LayerNorm(latent_dim)
         self.layer_norm_2 = nn.LayerNorm(latent_dim)
 
@@ -152,9 +153,8 @@ class Perceiver(nn.Module):
         for block in self.perceiver_blocks:
             latents = block(latents, x)
 
-        latents = latents.mean(dim=1)  # Aggregate latents
-        y = self.to_logits(latents)
-        return y  # Note that this returns logits directly
+        y = self.to_logits(latents)  # Produce logits for each latent
+        return y  # Return logits for each position in the sequence
 
 wandb.login(key='694fb34144778f8ff751adfb317024489e1a077e')
 # NEW W&B RUN
@@ -171,8 +171,8 @@ wandb.init(  # set the wandb project where this run will be logged
 learning_rate = 0.001
 
 seq_length = 256  # no. of chars per training sequence
-batch_size = 100  # no. of text sequences per batch
-num_batches = 10000  # no. of batches to train on
+batch_size = 32  # no. of text sequences per batch
+num_batches = 200000  # no. of batches to train on
 log_interval = 500  # num batches b/w logging training progress
 
 input_dim = 128
@@ -259,6 +259,8 @@ def estimate_compression(model, batch_num):
 def estimate_val_loss(model):
     inps, targs = batcher(val_data, seq_length, batch_size)
     val_out = model(inps)
+    val_out = val_out.view(-1, val_out.size(-1))
+    targs = targs.view(-1)
     return F.nll_loss(F.log_softmax(val_out, dim=-1), targs, reduction='mean')
 
 
@@ -277,6 +279,8 @@ for i in range(num_batches):
     inputs, targets = batcher(train_data, seq_length, batch_size)
 
     outputs = model(inputs)
+    outputs = outputs.view(-1, outputs.size(-1))
+    targets = targets.view(-1)
     loss = F.nll_loss(F.log_softmax(outputs, dim=-1), targets, reduction='mean')
 
     loss.backward()
