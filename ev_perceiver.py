@@ -110,8 +110,7 @@ class PerceiverBlock(nn.Module):
     def __init__(self, latent_dim, input_dim, nheads, dropout, ff_hidden):
         super().__init__()
         self.cross_attention = CrossAttention(latent_dim, input_dim, nheads)
-        self.self_attention = SelfAttention(latent_dim, nheads)
-
+        self.self_attention = _attention = SelfAttention(latent_dim, nheads)
         self.layer_norm_1 = nn.LayerNorm(latent_dim)
         self.layer_norm_2 = nn.LayerNorm(latent_dim)
 
@@ -153,10 +152,9 @@ class Perceiver(nn.Module):
         for block in self.perceiver_blocks:
             latents = block(latents, x)
 
-        y = self.to_logits(latents.mean(dim=1))  # Aggregate latents
-        lg_probs = F.log_softmax(y, dim=1)
-        return lg_probs
-
+        latents = latents.mean(dim=1)  # Aggregate latents
+        y = self.to_logits(latents)
+        return y  # Note that this returns logits directly
 
 wandb.login(key='694fb34144778f8ff751adfb317024489e1a077e')
 # NEW W&B RUN
@@ -174,8 +172,8 @@ learning_rate = 0.001
 
 seq_length = 256  # no. of chars per training sequence
 batch_size = 100  # no. of text sequences per batch
-num_batches = 5000  # no. of batches to train on
-log_interval = 100  # num batches b/w logging training progress
+num_batches = 10000  # no. of batches to train on
+log_interval = 500  # num batches b/w logging training progress
 
 input_dim = 128
 latent_dim = 128
@@ -190,7 +188,7 @@ sampling_temp = 0.8  # for scaling predicted probs for next char
 sample_length = 600  # length of text to sample/generate
 nchars_compression = 10000  # num of chars to predict for estimating compression
 
-sample_interval = 100  # num batches b/w sampling while training
+sample_interval = 10000  # num batches b/w sampling while training
 
 
 # SAMPLE a continuation for a random seed
@@ -261,7 +259,7 @@ def estimate_compression(model, batch_num):
 def estimate_val_loss(model):
     inps, targs = batcher(val_data, seq_length, batch_size)
     val_out = model(inps)
-    return F.nll_loss(val_out, targs, reduction='mean')
+    return F.nll_loss(F.log_softmax(val_out, dim=-1), targs, reduction='mean')
 
 
 # TRAINING
@@ -279,7 +277,7 @@ for i in range(num_batches):
     inputs, targets = batcher(train_data, seq_length, batch_size)
 
     outputs = model(inputs)
-    loss = F.nll_loss(outputs, targets, reduction='mean')
+    loss = F.nll_loss(F.log_softmax(outputs, dim=-1), targets, reduction='mean')
 
     loss.backward()
 
