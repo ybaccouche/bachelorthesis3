@@ -345,7 +345,7 @@ for params in param_combinations:
     sch = CosineAnnealingLR(opt, T_max=num_batches, eta_min=learning_rate/1000)
 
     # Early stopping parameters
-    patience = 100
+    patience = 1000
     best_val_loss = float('inf')
     epochs_no_improve = 0
     early_stop = False
