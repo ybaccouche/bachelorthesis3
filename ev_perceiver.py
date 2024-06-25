@@ -8,6 +8,7 @@ from torch.optim import AdamW
 from torch.nn.utils import clip_grad_norm_
 from torch.optim.lr_scheduler import CosineAnnealingLR
 import torch.nn.init as init
+from itertools import product
 
 import numpy as np
 import math, random, gzip
@@ -189,12 +190,10 @@ def kaiming_init_weights(model):
         init.constant_(model.weight, 1.0)
         
 # HYPERPARAMS
-parser = argparse.ArgumentParser(description='Perceiver Model')
+parser = argparse.ArgumentParser(description='Perceiver Model') 
 parser.add_argument('--learning_rate', type=float, default=0.0001, help='learning rate for training')
 parser.add_argument('--seq_length', type=int, default=256, help='number of characters per training sequence')
 parser.add_argument('--batch_size', type=int, default=32, help='number of text sequences per batch')
-parser.add_argument('--num_batches', type=int, default=100000, help='number of batches to train on')
-parser.add_argument('--log_interval', type=int, default=500, help='number of batches between logging training progress')
 parser.add_argument('--input_dim', type=int, default=128, help='input dimension')
 parser.add_argument('--latent_dim', type=int, default=128, help='latent dimension')
 parser.add_argument('--vocab_size', type=int, default=241, help='vocabulary size')
@@ -208,7 +207,6 @@ args = parser.parse_args()
 learning_rate = args.learning_rate
 seq_length = args.seq_length
 batch_size = args.batch_size
-num_batches = args.num_batches
 log_interval = args.log_interval
 input_dim = args.input_dim
 latent_dim = args.latent_dim
@@ -219,6 +217,25 @@ dropout = args.dropout
 ff_hidden = args.ff_hidden
 num_latents = args.num_latents
 
+param_grid = {
+    'learning_rate': [0.0001, 0.001],
+    'seq_length': [128, 256],
+    'batch_size': [32, 128],
+    'input_dim': [128, 256],
+    'latent_dim': [128, 256],
+    'nblocks': [6, 12],
+    'nheads': [4, 8],
+    'dropout': [0.2, 0.3],
+    'ff_hidden': [512, 1024],
+    'num_latents': [128, 256],
+}
+
+# Generate all combinations of hyperparameters
+param_combinations = list(product(*param_grid.values()))
+
+best_hyperparams = None
+best_val_loss = float('inf')
+
 # TRAINING
 # ~48 hours for 120k batches (~23 mins per 1000 batches on TitanX)
 
@@ -226,8 +243,8 @@ num_latents = args.num_latents
 
 #seq_length = 256  # no. of chars per training sequence
 #batch_size = 32  # no. of text sequences per batch
-#num_batches = 100000  # no. of batches to train on
-#log_interval = 500  # num batches b/w logging training progress
+num_batches = 400000  # no. of batches to train on
+log_interval = 500  # num batches b/w logging training progress
 
 #input_dim = 128
 #latent_dim = 128
@@ -317,43 +334,81 @@ def estimate_val_loss(model):
     return F.nll_loss(F.log_softmax(val_out, dim=-1), targs, reduction='mean')
 
 
-# TRAINING
-model = Perceiver(vocab_size, input_dim, seq_length, latent_dim, num_latents, nblocks, nheads, dropout, ff_hidden).to(device)
-model.apply(kaiming_init_weights)
-opt = AdamW(params=model.parameters(), lr=learning_rate, weight_decay=0.01)
-sch = CosineAnnealingLR(opt, T_max=num_batches, eta_min=learning_rate / 1000)  # learning rate scheduler
+for params in param_combinations:
+    hyperparams = dict(zip(param_grid.keys(), params))
+    print(f"Training with hyperparameters: {hyperparams}")
 
-best_val_loss = float('inf')
+    # Set hyperparameters
+    learning_rate = hyperparams['learning_rate']
+    seq_length = hyperparams['seq_length']
+    batch_size = hyperparams['batch_size']
+    input_dim = hyperparams['input_dim']
+    latent_dim = hyperparams['latent_dim']
+    nblocks = hyperparams['nblocks']
+    nheads = hyperparams['nheads']
+    dropout = hyperparams['dropout']
+    ff_hidden = hyperparams['ff_hidden']
+    num_latents = hyperparams['num_latents']
 
-for i in range(num_batches):
-    model.train()
-    opt.zero_grad()
+    # Initialize model, optimizer, and scheduler
+    model = Perceiver(vocab_size, input_dim, seq_length, latent_dim, num_latents, nblocks, nheads, dropout, ff_hidden).to(device)
+    model.apply(kaiming_init_weights)
+    opt = AdamW(params=model.parameters(), lr=learning_rate, weight_decay=0.01)
+    sch = CosineAnnealingLR(opt, T_max=num_batches, eta_min=learning_rate / 1000)
 
-    inputs, targets = batcher(train_data, seq_length, batch_size)
+    # Early stopping parameters
+    patience = 1000
+    best_val_loss = float('inf')
+    epochs_no_improve = 0
+    early_stop = False
 
-    outputs = model(inputs)
-    loss = F.nll_loss(outputs.transpose(2, 1), targets, reduction='mean')
+    for i in range(num_batches):
+        if early_stop:
+            print("Early stopping")
+            break
 
-    loss.backward()
-    clip_grad_norm_(model.parameters(), max_norm=1.0)
-    opt.step()
-    sch.step()
-    
-    if i == 0 or (i + 1) % log_interval == 0:
-        print(f'(batch {i+1:6d}) train loss: {loss.item():.4f}')
-        model.eval()
-        with torch.no_grad():
-            val_loss = estimate_val_loss(model)
-            wandb.log({'train loss': loss.item(), 'validation loss': val_loss.item(), '_step': i + 1})
-            if val_loss < best_val_loss:
-                best_val_loss = val_loss
-                torch.save(model.state_dict(), 'Perceiver_best.pt')
+        model.train()
+        opt.zero_grad()
 
-    if i == 0 or (i + 1) % sample_interval == 0:
-        model.eval()
-        with torch.no_grad():
-            sampler(model)
-            estimate_compression(model, i + 1)
+        inputs, targets = batcher(train_data, seq_length, batch_size)
 
+        outputs = model(inputs)
+        loss = F.nll_loss(outputs.transpose(2, 1), targets, reduction='mean')
+
+        loss.backward()
+        clip_grad_norm_(model.parameters(), max_norm=1.0)
+        opt.step()
+        sch.step()
+        
+        if i == 0 or (i + 1) % log_interval == 0:
+            print(f'(batch {i+1:6d}) train loss: {loss.item():.4f}')
+            model.eval()
+            with torch.no_grad():
+                val_loss = estimate_val_loss(model)
+                wandb.log({'train loss': loss.item(), 'validation loss': val_loss.item(), '_step': i + 1})
+
+                if val_loss < best_val_loss:
+                    best_val_loss = val_loss
+                    epochs_no_improve = 0
+                    torch.save(model.state_dict(), 'Perceiver_best.pt')
+                else:
+                    epochs_no_improve += 1
+
+                if epochs_no_improve >= patience:
+                    early_stop = True
+                    print("Early stopping triggered")
+                    break
+
+        if i == 0 or (i + 1) % sample_interval == 0:
+            model.eval()
+            with torch.no_grad():
+                sampler(model)
+                estimate_compression(model, i + 1)
+
+    if val_loss < best_val_loss:
+        best_val_loss = val_loss
+        best_hyperparams = hyperparams
+
+print(f'Best hyperparameters: {best_hyperparams}')
 print('training complete')
 wandb.finish()
