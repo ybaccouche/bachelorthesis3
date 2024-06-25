@@ -11,6 +11,7 @@ import torch.nn.init as init
 
 import numpy as np
 import math, random, gzip
+from itertools import product
 
 # use GPU
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -193,7 +194,7 @@ learning_rate = 0.0001
 
 seq_length = 256 # no. of chars per training sequence
 batch_size = 32 # no. of text sequences per batch
-num_batches = 200000 # no. of batches to train on 
+num_batches = 400000 # no. of batches to train on 
 log_interval = 500 # num batches b/w logging training progress
 
 embed_size = 128
@@ -284,6 +285,36 @@ def estimate_val_loss(model):
   val_out = model(inps)
   return F.nll_loss(val_out.transpose(2, 1), targs, reduction='mean')
 
+param_grid = {
+    'learning_rate': [0.0001, 0.0005],
+    'seq_length': [128, 256],
+    'batch_size': [16, 32],
+    'embed_size': [128, 256],
+    'nblocks': [6, 12],
+    'nheads': [4, 8],
+    'dropout': [0.2, 0.3],
+    'ff_hidden': [512, 1024],
+}
+
+# Generate all combinations of hyperparameters
+param_combinations = list(product(*param_grid.values()))
+
+best_hyperparams = None
+best_val_loss = float('inf')
+
+for params in param_combinations:
+    hyperparams = dict(zip(param_grid.keys(), params))
+    print(f"Training with hyperparameters: {hyperparams}")
+
+    # Set hyperparameters
+    learning_rate = hyperparams['learning_rate']
+    seq_length = hyperparams['seq_length']
+    batch_size = hyperparams['batch_size']
+    embed_size = hyperparams['embed_size']
+    nblocks = hyperparams['nblocks']
+    nheads = hyperparams['nheads']
+    dropout = hyperparams['dropout']
+    ff_hidden = hyperparams['ff_hidden']
 
 # TRAINING
 model = Transformer(vocab_size, embed_size, seq_length, nblocks, nheads, dropout, ff_hidden, mask).to(device)
@@ -293,49 +324,82 @@ sch = CosineAnnealingLR(opt, T_max=num_batches, eta_min=learning_rate/1000) # le
 
 best_val_loss = float('inf')
 
-for i in range(num_batches):
+for params in param_combinations:
+    hyperparams = dict(zip(param_grid.keys(), params))
+    print(f"Training with hyperparameters: {hyperparams}")
 
-  model.train()
-  opt.zero_grad()
+    # Set hyperparameters
+    learning_rate = hyperparams['learning_rate']
+    seq_length = hyperparams['seq_length']
+    batch_size = hyperparams['batch_size']
+    embed_size = hyperparams['embed_size']
+    nblocks = hyperparams['nblocks']
+    nheads = hyperparams['nheads']
+    dropout = hyperparams['dropout']
+    ff_hidden = hyperparams['ff_hidden']
 
-  inputs, targets = batcher(train_data, seq_length, batch_size)
+    # Initialize model, optimizer, and scheduler
+    model = Transformer(vocab_size, embed_size, seq_length, nblocks, nheads, dropout, ff_hidden, mask).to(device)
+    model.apply(kaiming_init_weights)
+    opt = AdamW(params=model.parameters(), lr=learning_rate, weight_decay=0.01)
+    sch = CosineAnnealingLR(opt, T_max=num_batches, eta_min=learning_rate/1000)
 
-  outputs = model(inputs)
-  loss = F.nll_loss(outputs.transpose(2, 1), targets, reduction='mean')
+    # Early stopping parameters
+    patience = 100
+    best_val_loss = float('inf')
+    epochs_no_improve = 0
+    early_stop = False
 
-  loss.backward()
+    for i in range(num_batches):
+        if early_stop:
+            print("Early stopping")
+            break
 
-  clip_grad_norm_(model.parameters(), max_norm=1.0)
+        model.train()
+        opt.zero_grad()
 
-  opt.step()
-  sch.step()
-  
-  if i == 0 or (i + 1) % log_interval == 0:
+        inputs, targets = batcher(train_data, seq_length, batch_size)
 
-    print(f'(batch {i+1:6d}) train loss: {loss.item():.4f}')
+        outputs = model(inputs)
+        loss = F.nll_loss(outputs.transpose(2, 1), targets, reduction='mean')
 
-    model.eval()
+        loss.backward()
 
-    with torch.no_grad():
+        clip_grad_norm_(model.parameters(), max_norm=1.0)
 
-      val_loss = estimate_val_loss(model)
+        opt.step()
+        sch.step()
+        
+        if i == 0 or (i + 1) % log_interval == 0:
+            print(f'(batch {i+1:6d}) train loss: {loss.item():.4f}')
+            model.eval()
 
-      wandb.log({'train loss':loss.item(), 'validation loss': val_loss.item(), '_step': i + 1})
+            with torch.no_grad():
+                val_loss = estimate_val_loss(model)
+                wandb.log({'train loss': loss.item(), 'validation loss': val_loss.item(), '_step': i + 1})
 
-      if val_loss < best_val_loss:
+                if val_loss < best_val_loss:
+                    best_val_loss = val_loss
+                    epochs_no_improve = 0
+                    torch.save(model.state_dict(), 'Transformer_best.pt')
+                else:
+                    epochs_no_improve += 1
+
+                if epochs_no_improve >= patience:
+                    early_stop = True
+                    print("Early stopping triggered")
+                    break
+
+        if i == 0 or (i + 1) % sample_interval == 0:
+            model.eval()
+            with torch.no_grad():
+                sampler(model)
+                estimate_compression(model, i + 1)
+
+    if val_loss < best_val_loss:
         best_val_loss = val_loss
+        best_hyperparams = hyperparams
 
-        torch.save(model.state_dict(), 'Transformer_longrun.pt')
-
-
-  if i == 0 or (i + 1) % sample_interval == 0:
-
-    model.eval()
-
-    with torch.no_grad():
-
-      sampler(model)
-      estimate_compression(model, i + 1)
-
+print(f'Best hyperparameters: {best_hyperparams}')
 print('training complete')
 wandb.finish()
