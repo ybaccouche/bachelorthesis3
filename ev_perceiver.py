@@ -207,7 +207,6 @@ args = parser.parse_args()
 learning_rate = args.learning_rate
 seq_length = args.seq_length
 batch_size = args.batch_size
-log_interval = args.log_interval
 input_dim = args.input_dim
 latent_dim = args.latent_dim
 vocab_size = args.vocab_size
@@ -357,7 +356,7 @@ for params in param_combinations:
     sch = CosineAnnealingLR(opt, T_max=num_batches, eta_min=learning_rate / 1000)
 
     # Early stopping parameters
-    patience = 1000
+    patience = 10000
     best_val_loss = float('inf')
     epochs_no_improve = 0
     early_stop = False
