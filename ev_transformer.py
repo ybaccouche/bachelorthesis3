@@ -286,9 +286,9 @@ def estimate_val_loss(model):
   return F.nll_loss(val_out.transpose(2, 1), targs, reduction='mean')
 
 param_grid = {
-    'learning_rate': [0.0001, 0.0005],
+    'learning_rate': [0.0001, 0.001],
     'seq_length': [128, 256],
-    'batch_size': [16, 32],
+    'batch_size': [32, 128],
     'embed_size': [128, 256],
     'nblocks': [6, 12],
     'nheads': [4, 8],
