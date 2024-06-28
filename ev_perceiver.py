@@ -278,7 +278,7 @@ best_val_loss = float('inf')
 
 #seq_length = 256  # no. of chars per training sequence
 #batch_size = 32  # no. of text sequences per batch
-num_batches = 1000000  # no. of batches to train on
+num_batches = 10000  # no. of batches to train on
 log_interval = 500  # num batches b/w logging training progress
 
 #input_dim = 128
