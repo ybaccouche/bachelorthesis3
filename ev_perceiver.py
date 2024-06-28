@@ -13,7 +13,6 @@ import wandb
 from sklearn.metrics import accuracy_score
 from nltk.translate.bleu_score import sentence_bleu
 import psutil  # For resource utilization
-import GPUtil # For GPU utilization
 import numpy as np
 import math, random, gzip
 import argparse
@@ -207,21 +206,10 @@ def log_resource_utilization(step):
     memory_info = psutil.virtual_memory()
     memory_usage = memory_info.percent
 
-    # Log GPU utilization
-    gpus = GPUtil.getGPUs()
-    if gpus:
-        gpu = gpus[0]  # Assuming a single GPU
-        gpu_usage = gpu.load * 100
-        gpu_memory_usage = gpu.memoryUtil * 100
-    else:
-        gpu_usage = 0
-        gpu_memory_usage = 0
 
     wandb.log({
         'cpu_usage': cpu_usage,
         'memory_usage': memory_usage,
-        'gpu_usage': gpu_usage,
-        'gpu_memory_usage': gpu_memory_usage,
         '_step': step
     })
         
