@@ -242,7 +242,7 @@ best_val_loss = float('inf')
 
 #seq_length = 256  # no. of chars per training sequence
 #batch_size = 32  # no. of text sequences per batch
-num_batches = 400000  # no. of batches to train on
+num_batches = 1000  # no. of batches to train on
 log_interval = 500  # num batches b/w logging training progress
 
 #input_dim = 128
@@ -356,7 +356,7 @@ for params in param_combinations:
     sch = CosineAnnealingLR(opt, T_max=num_batches, eta_min=learning_rate / 1000)
 
     # Early stopping parameters
-    patience = 10000
+    patience = 1000
     best_val_loss = float('inf')
     epochs_no_improve = 0
     early_stop = False
