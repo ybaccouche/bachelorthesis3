@@ -9,7 +9,11 @@ from torch.nn.utils import clip_grad_norm_
 from torch.optim.lr_scheduler import CosineAnnealingLR
 import torch.nn.init as init
 from itertools import product
-
+import wandb
+from sklearn.metrics import accuracy_score
+from nltk.translate.bleu_score import sentence_bleu
+import psutil  # For resource utilization
+import GPUtil # For GPU utilization
 import numpy as np
 import math, random, gzip
 import argparse
@@ -188,6 +192,38 @@ def kaiming_init_weights(model):
     elif isinstance(model, nn.LayerNorm):
         init.constant_(model.bias, 0)
         init.constant_(model.weight, 1.0)
+
+def calculate_perplexity(loss):
+    return torch.exp(loss)
+
+def calculate_bleu(outputs, targets):
+    # Assuming outputs and targets are lists of sentences (strings)
+    bleu_scores = [sentence_bleu([tgt.split()], out.split()) for out, tgt in zip(outputs, targets)]
+    return sum(bleu_scores) / len(bleu_scores)
+
+def log_resource_utilization(step):
+    # Log CPU and memory utilization
+    cpu_usage = psutil.cpu_percent()
+    memory_info = psutil.virtual_memory()
+    memory_usage = memory_info.percent
+
+    # Log GPU utilization
+    gpus = GPUtil.getGPUs()
+    if gpus:
+        gpu = gpus[0]  # Assuming a single GPU
+        gpu_usage = gpu.load * 100
+        gpu_memory_usage = gpu.memoryUtil * 100
+    else:
+        gpu_usage = 0
+        gpu_memory_usage = 0
+
+    wandb.log({
+        'cpu_usage': cpu_usage,
+        'memory_usage': memory_usage,
+        'gpu_usage': gpu_usage,
+        'gpu_memory_usage': gpu_memory_usage,
+        '_step': step
+    })
         
 # HYPERPARAMS
 parser = argparse.ArgumentParser(description='Perceiver Model') 
@@ -242,7 +278,7 @@ best_val_loss = float('inf')
 
 #seq_length = 256  # no. of chars per training sequence
 #batch_size = 32  # no. of text sequences per batch
-num_batches = 1000  # no. of batches to train on
+num_batches = 1000000  # no. of batches to train on
 log_interval = 500  # num batches b/w logging training progress
 
 #input_dim = 128
@@ -378,13 +414,40 @@ for params in param_combinations:
         clip_grad_norm_(model.parameters(), max_norm=1.0)
         opt.step()
         sch.step()
-        
+
+        # Calculate gradient norm
+        total_grad_norm = 0.0
+        for p in model.parameters():
+            if p.grad is not None:
+                param_grad_norm = p.grad.data.norm(2)
+                total_grad_norm += param_grad_norm.item() ** 2
+        total_grad_norm = total_grad_norm ** 0.5
+
         if i == 0 or (i + 1) % log_interval == 0:
             print(f'(batch {i+1:6d}) train loss: {loss.item():.4f}')
             model.eval()
             with torch.no_grad():
                 val_loss = estimate_val_loss(model)
-                wandb.log({'train loss': loss.item(), 'validation loss': val_loss.item(), '_step': i + 1})
+                train_perplexity = calculate_perplexity(loss)
+                val_perplexity = calculate_perplexity(val_loss)
+
+                # Dummy predictions and targets for BLEU score, replace with actual values
+                val_outputs = ["predicted sentence"] * len(targets)
+                val_targets = ["actual sentence"] * len(targets)
+                bleu_score = calculate_bleu(val_outputs, val_targets)
+
+                wandb.log({
+                    'train loss': loss.item(),
+                    'validation loss': val_loss.item(),
+                    'train perplexity': train_perplexity.item(),
+                    'validation perplexity': val_perplexity.item(),
+                    'bleu score': bleu_score,
+                    'gradient norm': total_grad_norm,
+                    '_step': i + 1
+                })
+
+                # Log resource utilization
+                log_resource_utilization(i + 1)
 
                 if val_loss < best_val_loss:
                     best_val_loss = val_loss
