@@ -264,12 +264,12 @@ best_val_loss = float('inf')
 
 #seq_length = 256  # no. of chars per training sequence
 #batch_size = 32  # no. of text sequences per batch
-num_batches = 1000000  # no. of batches to train on
+num_batches = 100000  # no. of batches to train on
 log_interval = 500  # num batches b/w logging training progress
 
 #input_dim = 128
 #latent_dim = 128
-#vocab_size = 241  # data chars 9 - 240
+vocab_size = 241  # data chars 9 - 240
 #nblocks, nheads = 12, 8  # no. of perceiver blocks, and attn heads
 #dropout = 0.1  # dropout probability
 #ff_hidden = 4 * latent_dim  # size of feedforward hidden layer in perceiver blocks
@@ -378,11 +378,12 @@ for params in param_combinations:
     sch = CosineAnnealingLR(opt, T_max=num_batches, eta_min=learning_rate / 1000)
 
     # Early stopping parameters
-    patience = 1000
+    patience = 100
     best_val_loss = float('inf')
     epochs_no_improve = 0
-    early_stop = False
+    early_stop = True
 
+    # Training Loop
     for i in range(num_batches):
         if early_stop:
             print("Early stopping")

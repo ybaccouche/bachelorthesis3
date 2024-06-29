@@ -108,7 +108,7 @@ class TransformerBlock(nn.Module):
     self.layer_norm_2 = nn.LayerNorm(emb_size)
 
     self.drop = nn.Dropout(p=dropout)
-
+ 
     self.feedforward = nn.Sequential(
         nn.Linear(emb_size, ff_hidden),
         nn.ReLU(inplace=True),
@@ -210,18 +210,18 @@ def log_resource_utilization(step):
 # TRAINING
 # ~48 hours for 120k batches (~23 mins per 1000 batches on TitanX)
 
-learning_rate = 0.0001
+#learning_rate = 0.0001
 
-seq_length = 256 # no. of chars per training sequence
-batch_size = 32 # no. of text sequences per batch
-num_batches = 1000000 # no. of batches to train on 
+#seq_length = 256 # no. of chars per training sequence
+#batch_size = 32 # no. of text sequences per batch
+num_batches = 100000 # no. of batches to train on 
 log_interval = 500 # num batches b/w logging training progress
 
-embed_size = 128
+#embed_size = 128
 vocab_size = 241 # data chars 9 - 240
-nblocks, nheads = 12, 8 # no. of transformer blocks, and attn heads
-dropout = 0.2 # dropout probability
-ff_hidden = 4 * embed_size # size of feedforward hidden layer in transf blocks
+#nblocks, nheads = 12, 8 # no. of transformer blocks, and attn heads
+#dropout = 0.2 # dropout probability
+#ff_hidden = 4 * embed_size # size of feedforward hidden layer in transf blocks
 mask = True # whether to apply causal masking
 
 # VALIDATION
@@ -322,28 +322,6 @@ param_combinations = list(product(*param_grid.values()))
 best_hyperparams = None
 best_val_loss = float('inf')
 
-for params in param_combinations:
-    hyperparams = dict(zip(param_grid.keys(), params))
-    print(f"Training with hyperparameters: {hyperparams}")
-
-    # Set hyperparameters
-    learning_rate = hyperparams['learning_rate']
-    seq_length = hyperparams['seq_length']
-    batch_size = hyperparams['batch_size']
-    embed_size = hyperparams['embed_size']
-    nblocks = hyperparams['nblocks']
-    nheads = hyperparams['nheads']
-    dropout = hyperparams['dropout']
-    ff_hidden = hyperparams['ff_hidden']
-
-# TRAINING
-model = Transformer(vocab_size, embed_size, seq_length, nblocks, nheads, dropout, ff_hidden, mask).to(device)
-model.apply(kaiming_init_weights)
-opt = AdamW(params=model.parameters(), lr=learning_rate, weight_decay=0.01)
-sch = CosineAnnealingLR(opt, T_max=num_batches, eta_min=learning_rate/1000) # learning rate scheduler
-
-best_val_loss = float('inf')
-
 # TRAINING
 for params in param_combinations:
     hyperparams = dict(zip(param_grid.keys(), params))
@@ -366,10 +344,10 @@ for params in param_combinations:
     sch = CosineAnnealingLR(opt, T_max=num_batches, eta_min=learning_rate/1000)
 
     # Early stopping parameters
-    patience = 1000
+    patience = 100
     best_val_loss = float('inf')
     epochs_no_improve = 0
-    early_stop = False
+    early_stop = True
 
     for i in range(num_batches):
         if early_stop:
