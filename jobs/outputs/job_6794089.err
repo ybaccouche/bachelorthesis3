@@ -1,0 +1,44 @@
+============================================================================================== 
+Warning! Mixing Conda and module environments may lead to corruption of the
+user environment. 
+We do not recommend users mixing those two environments unless absolutely
+necessary. Note that 
+SURF does not provide any support for Conda environment.
+For more information, please refer to our software policy page:
+https://servicedesk.surf.nl/wiki/display/WIKI/Software+policy+Snellius#SoftwarepolicySnellius-UseofAnacondaandMinicondaenvironmentsonSnellius 
+
+Remember that many packages have already been installed on the system and can
+be loaded using 
+the 'module load <package__name>' command. If you are uncertain if a package is
+already available 
+on the system, please use 'module avail' or 'module spider' to search for it.
+============================================================================================== 
+wandb: Currently logged in as: youssefbaccou (youssefbaccouche). Use `wandb login --relogin` to force relogin
+wandb: Appending key for api.wandb.ai to your netrc file: /home/scur2273/.netrc
+wandb: Tracking run with wandb version 0.17.3
+wandb: Run data is saved locally in /gpfs/home1/scur2273/bachelorthesis3/wandb/run-20240629_004422-u4tm6a23
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run helpful-voice-80
+wandb: ⭐️ View project at https://wandb.ai/youssefbaccouche/thesis-project
+wandb: 🚀 View run at https://wandb.ai/youssefbaccouche/thesis-project/runs/u4tm6a23
+/home/scur2273/.conda/envs/ybe/lib/python3.9/site-packages/nltk/translate/bleu_score.py:552: UserWarning: 
+The hypothesis contains 0 counts of 2-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+/home/scur2273/.conda/envs/ybe/lib/python3.9/site-packages/nltk/translate/bleu_score.py:552: UserWarning: 
+The hypothesis contains 0 counts of 3-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+/home/scur2273/.conda/envs/ybe/lib/python3.9/site-packages/nltk/translate/bleu_score.py:552: UserWarning: 
+The hypothesis contains 0 counts of 4-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+slurmstepd: error: *** JOB 6794089 ON gcn71 CANCELLED AT 2024-06-29T12:44:07 ***
+slurmstepd: error: container_p_join: setns failed for /slurm/6794089/.ns: Invalid argument
+slurmstepd: error: container_g_join(6794089): Invalid argument

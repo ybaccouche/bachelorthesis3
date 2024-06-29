@@ -1,0 +1,14 @@
+
+JOB STATISTICS
+==============
+Job ID: 6794089
+Cluster: snellius
+User/Group: scur2273/scur2273
+State: CANCELLED (exit code 0)
+Nodes: 1
+Cores per node: 18
+CPU Utilized: 00:00:02
+CPU Efficiency: 0.00% of 9-00:00:00 core-walltime
+Job Wall-clock time: 12:00:00
+Memory Utilized: 1.49 GB
+Memory Efficiency: 1.24% of 120.00 GB

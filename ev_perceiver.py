@@ -1,11 +1,9 @@
 import torch
-import wandb
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.distributions as dist
-
-from torch.optim import AdamW
 from torch.nn.utils import clip_grad_norm_
+from torch.optim import AdamW
 from torch.optim.lr_scheduler import CosineAnnealingLR
 import torch.nn.init as init
 from itertools import product
@@ -30,7 +28,7 @@ def data_loader(path, n_train, n_val, n_test):
 
 
 # LOAD DATA (Wikipedia 'en' text, 100m chars)
-data_path = '/home/ybe320/Thesis/bachelor-thesis3/bachelorthesis3/data/enwik8.gz'
+data_path = 'data/enwik8.gz'
 
 n_train, n_val, n_test = 90000000, 5000000, 5000000  # 90m, 5m, 5m
 
@@ -437,7 +435,7 @@ for params in param_combinations:
                 # Log resource utilization
                 log_resource_utilization(i + 1)
 
-                if val_loss < best_val_loss:
+                if val_loss < best_val_loss :
                     best_val_loss = val_loss
                     epochs_no_improve = 0
                     torch.save(model.state_dict(), 'Perceiver_best.pt')

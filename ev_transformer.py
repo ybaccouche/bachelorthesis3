@@ -28,7 +28,7 @@ def data_loader(path, n_train, n_val, n_test):
 
 
 # LOAD DATA (Wikipedia 'en' text, 100m chars)
-data_path = '/home/ybe320/Thesis/bachelor-thesis3/bachelorthesis3/data/enwik8.gz'
+data_path = 'data/enwik8.gz'
 
 n_train, n_val, n_test = 90000000, 5000000, 5000000 # 90m, 5m, 5m
 
