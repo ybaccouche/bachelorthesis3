@@ -13,7 +13,7 @@ module load cuda12.1/toolkit
 module load cuDNN/cuda12.1
 
 # Activate Anaconda environment
-source $HOME/.bashrc
+source $HOME/.bashrc 
 conda activate
 
 # Navigate to the existing experiment directory

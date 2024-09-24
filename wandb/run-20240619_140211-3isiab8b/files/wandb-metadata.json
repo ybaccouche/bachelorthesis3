@@ -1,0 +1,45 @@
+{
+    "os": "macOS-10.16-x86_64-i386-64bit",
+    "python": "3.9.13",
+    "heartbeatAt": "2024-06-19T12:02:11.611991",
+    "startedAt": "2024-06-19T12:02:11.054543",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/Users/youssefbaccouche/Developer/bachelor-thesis3/transformer.py",
+    "codePathLocal": "transformer.py",
+    "codePath": "transformer.py",
+    "git": {
+        "remote": "https://github.com/ybaccouche/bachelorthesis3.git",
+        "commit": "32bc08d04f2b030aa6a4c93141021029783f9384"
+    },
+    "email": "youssefbaccou@gmail.com",
+    "root": "/Users/youssefbaccouche/Developer/bachelor-thesis3",
+    "host": "Youssefs-MacBook-Pro.local",
+    "username": "youssefbaccouche",
+    "executable": "/opt/anaconda3/bin/python",
+    "cpu_count": 10,
+    "cpu_count_logical": 10,
+    "cpu_freq": {
+        "current": 2400,
+        "min": 2400,
+        "max": 2400
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2400,
+            "min": 2400,
+            "max": 2400
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 1858.1917190551758,
+            "used": 198.66132354736328
+        }
+    },
+    "memory": {
+        "total": 16.0
+    }
+}

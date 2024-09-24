@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/Users/youssefbaccouche/Developer/bachelor-thesis3/transformer.py", line 743, in <module>
+    main(args)
+  File "/Users/youssefbaccouche/Developer/bachelor-thesis3/transformer.py", line 675, in main
+    train_data, val_data, test_data = enwik8()
+  File "/Users/youssefbaccouche/Developer/bachelor-thesis3/transformer.py", line 40, in enwik8
+    with gzip.open(path) if path.endswith('.gz') else open(path) as file:
+  File "/opt/anaconda3/lib/python3.9/gzip.py", line 58, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+  File "/opt/anaconda3/lib/python3.9/gzip.py", line 173, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ybe320/Thesis/bachelor-thesis3/bachelorthesis3/data/enwik8.gz'

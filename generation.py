@@ -12,7 +12,7 @@ seed_sequence = torch.randint(256, (256,)).to(d())
 seed_sequence = torch.randint(256, (256,)).to(d())  # Seed sequence for text generation
 max_context = 256  # Maximum context length
 length = 256  # Length of generated text
-temperature = 0.5  # Sampling temperature
+temperature = 0.5  # Sampling temperature.
 
 sampled_sequence = sample_sequence(model, seed_sequence, max_context=max_context, length=length, temperature=temperature, verbose=True)
 

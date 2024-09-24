@@ -383,7 +383,7 @@ for params in param_combinations:
     patience = 100
     best_val_loss = float('inf')
     epochs_no_improve = 0
-    early_stop = True
+    early_stop = False
 
     # Training Loop
     for i in range(num_batches):
